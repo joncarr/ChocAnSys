@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuViewController">
+   <children>
+      <Label alignment="CENTER" layoutX="186.0" layoutY="30.0" text="Chocoholics Anonymous System" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <GridPane alignment="CENTER" layoutX="41.0" layoutY="77.0" prefHeight="199.0" prefWidth="320.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" prefWidth="125.0" text="Manage Members" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="125.0" text="Manage Providers" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefWidth="125.0" text="View Reports" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Manage Services" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefWidth="125.0" text="Process Visit" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" prefWidth="125.0" text="Weekly Process" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefWidth="125.0" text="Daily Acme Update" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefWidth="125.0" text="Exit System" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
