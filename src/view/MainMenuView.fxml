@@ -27,14 +27,14 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefWidth="125.0" text="Manage Members" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="125.0" text="Manage Providers" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefWidth="125.0" text="View Reports" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Manage Services" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefWidth="125.0" text="Process Visit" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" prefWidth="125.0" text="Weekly Process" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefWidth="125.0" text="Daily Acme Update" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefWidth="125.0" text="Exit System" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="btnManageMembers" mnemonicParsing="false" onAction="#manageMembersBtnHandler" prefWidth="125.0" text="Manage Members" />
+            <Button fx:id="btnManageProviders" alignment="CENTER" mnemonicParsing="false" onAction="#manageProvidersBtnHandler" prefWidth="125.0" text="Manage Providers" GridPane.rowIndex="1" />
+            <Button fx:id="btnViewReports" mnemonicParsing="false" onAction="#viewReportsBtnHandler" prefWidth="125.0" text="View Reports" GridPane.rowIndex="3" />
+            <Button fx:id="btnManageServices" mnemonicParsing="false" onAction="#manageServicesBtnHandler" prefHeight="25.0" prefWidth="125.0" text="Manage Services" GridPane.rowIndex="2" />
+            <Button fx:id="btnProcessVisit" mnemonicParsing="false" onAction="#processVisitBtnHandler" prefWidth="125.0" text="Process Visit" GridPane.columnIndex="1" />
+            <Button fx:id="btnWeeklyProcess" mnemonicParsing="false" onAction="#weeklyProcessBtnHandler" prefWidth="125.0" text="Weekly Process" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="btnAcmeUpdate" mnemonicParsing="false" onAction="#acmeUpdateBtnHandler" prefWidth="125.0" text="Daily Acme Update" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="btnExitSystem" mnemonicParsing="false" onAction="#systemExitBtnHandler" prefWidth="125.0" text="Exit System" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>

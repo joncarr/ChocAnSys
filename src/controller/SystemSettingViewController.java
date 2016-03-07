@@ -2,6 +2,7 @@ package controller;
 
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
@@ -37,7 +38,16 @@ public class SystemSettingViewController {
     private void changeDirBtnHandler(){
         DirectoryChooser directoryChooser = new DirectoryChooser();
         workingDirectory = directoryChooser.showDialog(new Stage());
-        lblCurrentDir.setText(workingDirectory.getAbsolutePath());
+        if (workingDirectory == null){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Change Directory");
+            alert.setContentText("Your directory was not changed.");
+            alert.showAndWait();
+
+        } else {
+            lblCurrentDir.setText(workingDirectory.getAbsolutePath());
+        }
     }
 
     @FXML

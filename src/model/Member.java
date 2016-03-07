@@ -20,7 +20,8 @@ package model;
 
 public class Member {
 
-    private String name;
+    private String firstName;
+    private String lastName;
     private int number;
     private String street;
     private String city;
@@ -31,120 +32,92 @@ public class Member {
     
     //Constructor
     
-    //TODO: Create Constructors
-
-    //Getters
-    
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
+    public Member(int mbrNum, String firstName, String lastName,
+                  String street, String city, String state, String zipCode,
+                  char mbrStatus){
+        this.number = mbrNum;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.status = mbrStatus;
     }
 
-    /**
-     * @return the number
-     */
+    //Getters
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     public int getNumber() {
         return number;
     }
 
-    /**
-     * @return the street
-     */
     public String getStreet() {
         return street;
     }
 
-    /**
-     * @return the city
-     */
     public String getCity() {
         return city;
     }
 
-    /**
-     * @return the state
-     */
     public String getState() {
         return state;
     }
 
-    /**
-     * @return the zipCode
-     */
     public String getZipCode() {
         return zipCode;
     }
 
-    /**
-     * @return the status
-     */
     public char getStatus() {
         return status;
     }
 
-    /**
-     * @return the serviceList
-     */
     public MemberServiceItem[] getServiceList() {
         return serviceList;
     }
     
     //Setters
 
-    /**
-     * @param mbrName the name to set
-     */
-    public void setName(String mbrName) {
-        this.name = mbrName;
+
+    public void setFirstName(String mbrFirstName) {
+        this.firstName = mbrFirstName;
     }
 
-    /**
-     * @param mbrNbr the number to set
-     */
+    public void setLastName(String mbrLastName) {
+        this.firstName = mbrLastName;
+    }
+
     public void setNumber(int mbrNbr) {
         this.number = mbrNbr;
     }
 
-    /**
-     * @param mbrStreet the street to set
-     */
     public void setStreet(String mbrStreet) {
         this.street = mbrStreet;
     }
 
-    /**
-     * @param mbrCity the city to set
-     */
     public void setCity(String mbrCity) {
         this.city = mbrCity;
     }
 
-    /**
-     * @param mbrState the state to set
-     */
     public void setState(String mbrState) {
         this.state = mbrState;
     }
 
-    /**
-     * @param mbrZipCode the zipCode to set
-     */
     public void setZipCode(String mbrZipCode) {
         this.zipCode = mbrZipCode;
     }
 
-    /**
-     * @param mbrStatus the status to set
-     */
     public void setStatus(char mbrStatus) {
         this.status = mbrStatus;
     }
 
-    /**
-     * @param serviceList the serviceList to set
-     */
     public void setServiceList(MemberServiceItem[] serviceList) {
         this.serviceList = serviceList;
     }
