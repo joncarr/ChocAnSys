@@ -23,7 +23,7 @@ public class Service {
     private String name;
     private int code;
     private float fee;
-    private char status;
+    private String status;       //Changed from Char to String 10 March 2016
     
     //Constructor
     
@@ -43,7 +43,7 @@ public class Service {
         return fee;
     }
     
-    public char getStatus(){
+    public String getStatus(){
         return status;
     }
     
@@ -61,7 +61,7 @@ public class Service {
         this.fee = svcFee;
     }
     
-    public void setStatus(char svcStatus){
+    public void setStatus(String svcStatus){
         this.status = svcStatus;
     }
     

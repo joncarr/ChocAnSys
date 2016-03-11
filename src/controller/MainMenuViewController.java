@@ -15,19 +15,19 @@ public class MainMenuViewController {
     }
 
     public void manageProvidersBtnHandler(){
-
+        main.manageProvidersWindow();
     }
 
     public void manageServicesBtnHandler(){
-
+        main.manageServicesWindow();
     }
 
     public void viewReportsBtnHandler(){
-
+        main.viewReportsWindow();
     }
 
     public void processVisitBtnHandler(){
-
+        main.processVisitWindow();
     }
 
     public void weeklyProcessBtnHandler(){

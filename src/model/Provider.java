@@ -20,29 +20,45 @@ package model;
 
 public class Provider {
     
-    private String name;
+    private String firstName;
+    private String lastName;
     private int number;
     private String street;
     private String city;
     private String state;
     private String zipCode;
-    private char status;
+    private String status;                    //Changed from char to String on 10 March 2016
     private ProviderServiceItem[] serviceList;
     private int totalVisits;
     private double totalFees;
     
     
     //Constructor
-    
-    //TODO: Create Constructors
+
+    public Provider(int mbrNum, String firstName, String lastName,
+                  String street, String city, String state, String zipCode,
+                  String mbrStatus){
+        this.number = mbrNum;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.status = mbrStatus;
+    }
     
     //Getters
 
     /**
      * @return the name
      */
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     /**
@@ -83,7 +99,7 @@ public class Provider {
     /**
      * @return the status
      */
-    public char getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -113,8 +129,12 @@ public class Provider {
     /**
      * @param name the name to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String name) {
+        this.firstName = name;
+    }
+
+    public void setLastName(String name) {
+        this.lastName = name;
     }
 
     /**
@@ -155,7 +175,7 @@ public class Provider {
     /**
      * @param status the status to set
      */
-    public void setStatus(char status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

@@ -27,14 +27,14 @@ public class Member {
     private String city;
     private String state;
     private String zipCode;
-    private char status;
+    private String status;  //Changed from char to String 7 March 2016
     private MemberServiceItem[] serviceList;
     
     //Constructor
     
     public Member(int mbrNum, String firstName, String lastName,
                   String street, String city, String state, String zipCode,
-                  char mbrStatus){
+                  String mbrStatus){
         this.number = mbrNum;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -75,7 +75,7 @@ public class Member {
         return zipCode;
     }
 
-    public char getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -114,7 +114,7 @@ public class Member {
         this.zipCode = mbrZipCode;
     }
 
-    public void setStatus(char mbrStatus) {
+    public void setStatus(String mbrStatus) {
         this.status = mbrStatus;
     }
 

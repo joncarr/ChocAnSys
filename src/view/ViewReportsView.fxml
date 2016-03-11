@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewReportsViewController">
+   <children>
+      <Label alignment="CENTER" layoutY="30.0" text="View Reports" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="200.0" layoutY="110.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnMembersReport" mnemonicParsing="false" onAction="#membersReportBtnHandler" prefWidth="125.0" text="Members Report" />
+            <Button fx:id="btnProviderReport" layoutX="59.0" layoutY="13.0" mnemonicParsing="false" onAction="#providerReportBtnHandler" prefWidth="125.0" text="Provider Report" GridPane.rowIndex="1" />
+            <Button fx:id="btnManagersReport" layoutX="59.0" layoutY="43.0" mnemonicParsing="false" onAction="#managersReportBtnHandler" prefWidth="125.0" text="Manager's Report" GridPane.rowIndex="2" />
+            <Button fx:id="btnEftData" layoutX="59.0" layoutY="73.0" mnemonicParsing="false" onAction="#eftDataBtnHandler" prefWidth="125.0" text="EFT Data" GridPane.columnIndex="1" />
+            <Button fx:id="btnAcmeUpdate" layoutX="59.0" layoutY="13.0" mnemonicParsing="false" onAction="#acmeUpdateBtnHandler" prefWidth="125.0" text="ACME Update" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="btnErrorLog" layoutX="160.0" layoutY="43.0" mnemonicParsing="false" onAction="#errorLogBtnHandler" prefWidth="125.0" text="Error Log" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <HBox alignment="CENTER" layoutX="174.0" layoutY="230.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="btnBacktoMainMenu" mnemonicParsing="false" onAction="#backToMainMenuBtnHandler" text="Back to Main Menu" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

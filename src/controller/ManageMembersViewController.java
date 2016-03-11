@@ -13,15 +13,15 @@ public class ManageMembersViewController {
     }
 
     public void updateMemberHandler(){
-
+        main.updateMembersWindow();
     }
 
     public void addMemberHandler(){
-
+        main.addMembersWindow();
     }
 
     public void deleteMemberHandler(){
-
+        main.deleteMembersWindow();
     }
 
     public void exitMembersHandler(){

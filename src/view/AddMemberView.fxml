@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,10 +12,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddUpdateMemberViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddMemberViewController">
    <children>
-      <Label fx:id="lblFormHeader" alignment="CENTER" layoutX="186.0" layoutY="30.0" text="Update Member" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Label fx:id="lblFormHeader" alignment="CENTER" layoutX="186.0" layoutY="30.0" text="Add Member" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -46,32 +45,27 @@
             <Label fx:id="lblFirstName" text="First Name:" GridPane.rowIndex="1" />
             <Label fx:id="lblStreet" text="Street:" GridPane.rowIndex="3" />
             <Label fx:id="lblState" text="State:" GridPane.rowIndex="5" />
-            <TextField fx:id="textFieldMemberNumber" GridPane.columnIndex="1">
+            <TextField fx:id="textFieldMemberNumber" promptText="Member Number" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="textFieldMemberFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="textFieldMemberFirstName" promptText="Member First Name" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="textFieldMemberStreet" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="textFieldMemberStreet" promptText="Member Street Address" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </TextField>
-            <ChoiceBox fx:id="choiceBoxMemberState" prefHeight="25.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin>
-            </ChoiceBox>
             <Label fx:id="lblZipCode" text="Zip Code:" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <padding>
                   <Insets right="5.0" />
                </padding>
             </Label>
-            <TextField fx:id="textFieldMemberZipCode" prefHeight="25.0" prefWidth="44.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+            <TextField fx:id="textFieldMemberZipCode" prefHeight="25.0" prefWidth="44.0" promptText="Member Zip Code" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
@@ -81,12 +75,7 @@
                   <Insets right="5.0" />
                </padding>
             </Label>
-            <Label fx:id="lblMemberStatus" text="Label" GridPane.columnIndex="3">
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin>
-            </Label>
-            <TextField fx:id="textFieldMemberLastName" layoutX="96.0" layoutY="43.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="textFieldMemberLastName" layoutX="96.0" layoutY="43.0" promptText="Member Last Name" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <opaqueInsets>
                   <Insets left="20.0" />
                </opaqueInsets>
@@ -96,11 +85,21 @@
             </TextField>
             <Label fx:id="lblLastName" text="Last Name:" GridPane.rowIndex="2" />
             <Label fx:id="lblCity" text="City:" GridPane.rowIndex="4" />
-            <TextField fx:id="textFieldMemberCity" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <TextField fx:id="textFieldMemberCity" promptText="Member City" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </TextField>
+            <TextField fx:id="textFieldMemberState" promptText="Member State" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <ComboBox fx:id="comboBoxMemberStatus" prefWidth="150.0" promptText="Member Status" GridPane.columnIndex="3">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </ComboBox>
          </children>
       </GridPane>
    </children>
