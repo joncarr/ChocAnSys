@@ -1,7 +1,7 @@
 /*******************************************************************************
  *******************************************************************************
  *******************************************************************************
- File: ManageMembersViewController.java
+ File: DBHelper.java
  Project: IntelliJ IDEA 15.0
  Assignment: Chocoholics Anonymous System
  University: McMurry University
@@ -17,33 +17,8 @@
  ********************************************************************************
  *******************************************************************************/
 
-package controller;
 
-import javafx.stage.Stage;
+package model;
 
-public class ManageMembersViewController {
-
-    private ChocAnSysApp main;
-    private Stage dialog;
-
-    public void setMain(ChocAnSysApp main, Stage dialog){
-        this.main = main;
-        this.dialog = dialog;
-    }
-
-    public void updateMemberHandler(){
-        main.searchUpdateMemberWindow();
-    }
-
-    public void addMemberHandler(){
-        main.addMembersWindow();
-    }
-
-    public void deleteMemberHandler(){
-        main.deleteMembersWindow();
-    }
-
-    public void exitMembersHandler(){
-        dialog.close();
-    }
+public class DBHelper {
 }

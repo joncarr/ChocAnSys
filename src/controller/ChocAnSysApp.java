@@ -129,6 +129,25 @@ public class ChocAnSysApp extends Application {
         }
     }
 
+    public void searchUpdateMemberWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(ChocAnSysApp.class.getResource("../view/SearchUpdateMemberView.fxml"));
+            AnchorPane pane = loader.load();
+
+            SearchUpdateMemberViewController controller = loader.getController();
+            Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            controller.setMain(this, dialog);
+
+            dialog.setTitle("Chocoholics Anonymous System");
+            dialog.setScene(new Scene(pane, 400, 300));
+            dialog.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addMembersWindow() {
         try {
             FXMLLoader loader = new FXMLLoader(ChocAnSysApp.class.getResource("../view/addMemberView.fxml"));
