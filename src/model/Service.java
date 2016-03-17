@@ -28,7 +28,14 @@ public class Service {
     
     //Constructor
     
-    //TODO: Create Constructors
+    public Service(){}
+
+    public Service(int code, String description, float fee, String status){
+        this.code = code;
+        this.name = description;
+        this.fee = fee;
+        this.status = status;
+    }
     
     //Getters
     

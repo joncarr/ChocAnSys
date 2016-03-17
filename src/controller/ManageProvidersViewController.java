@@ -32,7 +32,7 @@ public class ManageProvidersViewController {
     }
 
     public void updateProviderHandler(){
-        main.updateProvidersWindow();
+        main.searchUpdateProviderWindow();
     }
 
     public void addProviderHandler(){
@@ -40,7 +40,7 @@ public class ManageProvidersViewController {
     }
 
     public void deleteProviderHandler(){
-        main.deleteProvidersWindow();
+        main.searchDeleteProviderWindow();
     }
 
     public void exitProvidersHandler(){

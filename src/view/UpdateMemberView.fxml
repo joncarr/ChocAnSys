@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -74,11 +75,6 @@
                   <Insets right="5.0" />
                </padding>
             </Label>
-            <Label fx:id="lblMemberStatus" text="Label" GridPane.columnIndex="3">
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin>
-            </Label>
             <TextField fx:id="textFieldMemberLastName" layoutX="96.0" layoutY="43.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <opaqueInsets>
                   <Insets left="20.0" />
@@ -94,11 +90,16 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="textFieldMemberState" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <ComboBox fx:id="comboBoxMemberState" prefHeight="25.0" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
-            </TextField>
+            </ComboBox>
+            <ComboBox fx:id="comboBoxMemberStatus" prefHeight="25.0" prefWidth="193.0" GridPane.columnIndex="3">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </ComboBox>
          </children>
       </GridPane>
    </children>

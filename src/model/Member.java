@@ -29,6 +29,7 @@ public class Member {
     private String zipCode;
     private String status;  //Changed from char to String 7 March 2016
     private MemberServiceItem[] serviceList;
+
     
     //Constructor
     
@@ -43,6 +44,10 @@ public class Member {
         this.state = state;
         this.zipCode = zipCode;
         this.status = mbrStatus;
+    }
+
+    public Member(){
+
     }
 
     //Getters
@@ -91,7 +96,7 @@ public class Member {
     }
 
     public void setLastName(String mbrLastName) {
-        this.firstName = mbrLastName;
+        this.lastName = mbrLastName;
     }
 
     public void setNumber(int mbrNbr) {

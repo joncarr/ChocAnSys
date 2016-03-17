@@ -20,49 +20,62 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.DBConnection;
 import model.Member;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.Optional;
 
 public class DeleteMemberViewController {
 
-    //TODO: Rewrite this class to work with Database
-    //TODO: Change Status on form to be updateable
-    //TODO: Add a button to look up the member you want to delete and prepopulate the fields with query result
 
     private ChocAnSysApp main;
-    Stage dialog;
-    Member member;
-    @FXML private TextField textFieldMemberNumber;
-    @FXML private TextField textFieldMemberFirstName;
-    @FXML private TextField textFieldMemberLastName;
-    @FXML private TextField textFieldMemberStreet;
-    @FXML private TextField textFieldMemberCity;
-    @FXML private TextField textFieldMemberZipCode;
-    @FXML private TextField textFieldMemberState;
+    private Stage dialog;
+    private Member member;
+    private Connection db;
+    private PreparedStatement stmt;
+    @FXML private Label lblMemberNumber;
+    @FXML private Label lblMemberFirstName;
+    @FXML private Label lblMemberLastName;
+    @FXML private Label lblMemberStreet;
+    @FXML private Label lblMemberCity;
+    @FXML private Label lblMemberState;
+    @FXML private Label lblMemberZip;
     @FXML private Label lblMemberStatus;
 
-    public void setMain(ChocAnSysApp main, Stage dialog){
+    public void setMain(ChocAnSysApp main, Stage dialog, Member member){
         this.main = main;
         this.dialog = dialog;
         this.member = member;
+        db = DBConnection.connect();
+        fillMemberDetails(member);
 
     }
 
     public void confirmBtnHandler(){
-        Member newMember = new Member(
-                Integer.parseInt(textFieldMemberNumber.getText()),
-                textFieldMemberFirstName.getText(),
-                textFieldMemberLastName.getText(),
-                textFieldMemberStreet.getText(),
-                textFieldMemberCity.getText(),
-                textFieldMemberState.getText(),
-                textFieldMemberZipCode.getText(),
-                lblMemberStatus.getText()
+        try{
+            String sql = "delete from members where id = " + lblMemberNumber.getText();
+            stmt = db.prepareStatement(sql);
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setHeaderText("Delete Member");
+            confirm.setContentText("Are you sure you want to delete this member?");
+            Optional<ButtonType> result = confirm.showAndWait();
+            if(result.get() == ButtonType.OK){
+                stmt.execute();
+            } else {
+                dialog.close();
+            }
+            db.close();
+            dialog.close();
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
 
 
-        );
 
     }
 
@@ -75,14 +88,14 @@ public class DeleteMemberViewController {
     Function is called when the user wishes to UPDATE a member, rather than just adding a member
     This function takes the member information that was passed to this controller and pre-populates the text fields
     */
-    public void fillMemberDetails(){
-        textFieldMemberNumber.setText(String.valueOf(member.getNumber()));
-        textFieldMemberFirstName.setText(member.getFirstName());
-        textFieldMemberLastName.setText(member.getLastName());
-        textFieldMemberStreet.setText(member.getStreet());
-        textFieldMemberCity.setText(member.getCity());
-        textFieldMemberState.setText(member.getState());
-        textFieldMemberZipCode.setText(member.getZipCode());
+    public void fillMemberDetails(Member member){
+        lblMemberNumber.setText(String.valueOf(member.getNumber()));
+        lblMemberFirstName.setText(member.getFirstName());
+        lblMemberLastName.setText(member.getLastName());
+        lblMemberStreet.setText(member.getStreet());
+        lblMemberCity.setText(member.getCity());
+        lblMemberState.setText(member.getState());
+        lblMemberZip.setText(member.getZipCode());
         lblMemberStatus.setText(member.getStatus());
     }
 

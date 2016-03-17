@@ -28,7 +28,7 @@
       <GridPane alignment="CENTER" layoutX="50.0" layoutY="118.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
         <columnConstraints>
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="62.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="187.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="187.0" />
             <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="105.0" minWidth="10.0" prefWidth="80.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="164.0" />
         </columnConstraints>
@@ -90,12 +90,12 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="textFieldMemberState" promptText="Member State" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <ComboBox fx:id="comboBoxMemberStatus" prefWidth="150.0" promptText="Member Status" GridPane.columnIndex="3">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
-            </TextField>
-            <ComboBox fx:id="comboBoxMemberStatus" prefWidth="150.0" promptText="Member Status" GridPane.columnIndex="3">
+            </ComboBox>
+            <ComboBox fx:id="comboBoxMemberState" prefHeight="25.0" prefWidth="268.0" promptText="Member State" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>

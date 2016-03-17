@@ -32,7 +32,7 @@ public class ManageServicesViewController {
     }
 
     public void updateServiceHandler(){
-        main.updateServicesWindow();
+        main.searchUpdateServicesWindow();
     }
 
     public void addServiceHandler(){
@@ -40,7 +40,7 @@ public class ManageServicesViewController {
     }
 
     public void deleteServiceHandler(){
-        main.deleteServicesWindow();
+        main.searchDeleteServicesWindow();
     }
 
     public void exitServicesHandler(){

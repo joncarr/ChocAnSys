@@ -1,7 +1,7 @@
 /*******************************************************************************
  *******************************************************************************
  *******************************************************************************
- File: AddMemberViewController.java
+ File: SearchUpdateServicesViewController.java
  Project: IntelliJ IDEA 15.0
  Assignment: Chocoholics Anonymous System
  University: McMurry University
@@ -12,23 +12,20 @@
  Update by: Additional coder’s name
  Updated: Date code was updated
  Compiler: NetBeans IDE Java SE
- Description: Class Definitions for Provider class
+ Description: Controller class for searching for services to update
  ********************************************************************************
  ********************************************************************************
  *******************************************************************************/
+
+
 /*******************************************************************************
  *******************************************************************************
  *******************************************************************************
- SQLlite Database column names:
- 1: id
- 2: fname
- 3: lname
- 4: street
- 5: city
- 6: state
- 7: zip
- 8: status
- 9: totalvisits
+ SQLlite Database services column names:
+ 1: svccode
+ 2: svcdescription
+ 3: fee
+ 4: status
  ********************************************************************************
  ********************************************************************************
  *******************************************************************************/
@@ -40,21 +37,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.DBConnection;
-import model.Member;
+import model.Service;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
-public class SearchUpdateMemberViewController {
+public class SearchUpdateServicesViewController {
 
     private ChocAnSysApp main;
     private Stage dialog;
     private Connection db;
-    @FXML private TextField textFieldMemberNumber;
+    @FXML private TextField textFieldServiceCode;
     private Statement stmt;
-    private ResultSet rs;
+    private ResultSet rs2;
 
 
 
@@ -68,27 +65,24 @@ public class SearchUpdateMemberViewController {
     public void lookupBtnHandler(){
         // QUERY THE DB AND STORE INFO TO POPULATE FIELDS
         try{
-            Member member = new Member();
+            Service service = new Service();
             stmt = db.createStatement();
-            rs = stmt.executeQuery("select * from members where id = " + textFieldMemberNumber.getText() + " ;");
-            member.setNumber(rs.getInt("id"));
-            member.setFirstName(rs.getString("fname"));
-            member.setLastName(rs.getString("lname"));
-            member.setStreet(rs.getString("street"));
-            member.setCity(rs.getString("city"));
-            member.setState(rs.getString("state"));
-            member.setZipCode(rs.getString("zip"));
-            member.setStatus(rs.getString("status"));
+            rs2 = stmt.executeQuery("select * from services where svccode = " + textFieldServiceCode.getText() + " ;");
+            service.setCode(rs2.getInt("svccode"));
+            service.setName(rs2.getString("svcdescription"));
+            service.setFee(rs2.getFloat("fee"));
+            service.setStatus(rs2.getString("status"));
+
 
 
             //PRINT RESULT SET TO VERIFY CORRECT QUERY
-            ResultSetMetaData rsmd = rs.getMetaData();
+            ResultSetMetaData rsmd = rs2.getMetaData();
             System.out.println("querying SELECT * FROM XXX");
             int columnsNumber = rsmd.getColumnCount();
-            while (rs.next()) {
+            while (rs2.next()) {
                 for (int i = 1; i <= columnsNumber; i++) {
                     if (i > 1) System.out.print(",  ");
-                    String columnValue = rs.getString(i);
+                    String columnValue = rs2.getString(i);
                     System.out.print(columnValue + " " + rsmd.getColumnName(i));
                 }
                 System.out.println("");
@@ -96,21 +90,15 @@ public class SearchUpdateMemberViewController {
           //END PRINT RESULT SET
 
             //PRINT MEMBER CONTENTS TO VERIFY
-            System.out.println("ID: " + member.getNumber());
-            System.out.println("FirstName: " + member.getFirstName());
-            System.out.println("LastName: " + member.getLastName());
-            System.out.println("Street: " + member.getStreet());
-            System.out.println("City: " + member.getCity());
-            System.out.println("State: " + member.getState());
-            System.out.println("Zip: " + member.getZipCode());
-            System.out.println("Status: " + member.getStatus());
+            System.out.println("Service Code: " + service.getCode());
+            System.out.println("Service Description: " + service.getName());
+            System.out.println("Service Fee: " + service.getFee());
+            System.out.println("Service Status: " + service.getStatus());
+
             //end print member contents
 
-
-            main.updateMembersWindow(member);
-            db.close();
+            main.updateServicesWindow(service);
             dialog.close();
-
 
 
 

@@ -17,13 +17,35 @@
  ********************************************************************************
  *******************************************************************************/
 
+/*******************************************************************************
+ *******************************************************************************
+ *******************************************************************************
+ SQLlite Database providers column names:
+ 1: id
+ 2: fname
+ 3: lname
+ 4: street
+ 5: city
+ 6: state
+ 7: zip
+ 8: status
+ 9: totalvisits
+ ********************************************************************************
+ ********************************************************************************
+ *******************************************************************************/
+
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.Member;
+import model.DBConnection;
+import model.Provider;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 
 public class AddProviderViewController {
 
@@ -32,39 +54,68 @@ public class AddProviderViewController {
 
     private ChocAnSysApp main;
     Stage dialog;
-    Member member;
+    Provider provider;
+    PreparedStatement stmt;
+    Connection db;
     @FXML private TextField textFieldProviderNumber;
     @FXML private TextField textFieldProviderFirstName;
     @FXML private TextField textFieldProviderLastName;
     @FXML private TextField textFieldProviderStreet;
     @FXML private TextField textFieldProviderCity;
     @FXML private TextField textFieldProviderZipCode;
-    @FXML private TextField textFieldProviderState;
+    @FXML private ComboBox<String> comboBoxProviderState;
     @FXML private ComboBox<String> comboBoxProviderStatus;
 
 
     public void setMain(ChocAnSysApp main, Stage dialog) {
         this.main = main;
         this.dialog = dialog;
+        db = DBConnection.connect();
+        main.populateState(comboBoxProviderState);
+        main.populateStatus(comboBoxProviderStatus);
 
     }
 
+    @FXML
     public void confirmBtnHandler() {
-        Member newMember = new Member(
+
+        Provider newProvider = new Provider(
                 Integer.parseInt(textFieldProviderNumber.getText()),
                 textFieldProviderFirstName.getText(),
                 textFieldProviderLastName.getText(),
                 textFieldProviderStreet.getText(),
                 textFieldProviderCity.getText(),
-                textFieldProviderState.getText(),
+                comboBoxProviderState.getValue(),
                 textFieldProviderZipCode.getText(),
                 comboBoxProviderStatus.getValue()
-
-
         );
+        try{
+            stmt = db.prepareStatement("insert into providers VALUES (?,?,?,?,?,?,?,?,?);");
+            stmt.setInt(1, newProvider.getNumber());
+            stmt.setString(2, newProvider.getFirstName());
+            stmt.setString(3, newProvider.getLastName());
+            stmt.setString(4, newProvider.getStreet());
+            stmt.setString(5, newProvider.getCity());
+            stmt.setString(6, newProvider.getState());
+            stmt.setString(7, newProvider.getZipCode());
+            stmt.setString(8, newProvider.getStatus());
+            stmt.setInt(9, 0);
+            stmt.execute();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Add New Provider");
+            alert.setContentText("Provider successfully added.");
+            alert.showAndWait();
+            db.close();
+            dialog.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+
 
     }
 
+    @FXML
     public void cancelBtnHandler() {
         dialog.close();
     }
