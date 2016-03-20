@@ -17,22 +17,45 @@
  ********************************************************************************
  *******************************************************************************/
 
+/*******************************************************************************
+ *******************************************************************************
+ *******************************************************************************
+SQLlite Database column names:
+ 1: id
+ 2: fname
+ 3: lname
+ 4: street
+ 5: city
+ 6: state
+ 7: zip
+ 8: status
+ 9: totalvisits
+ ********************************************************************************
+ ********************************************************************************
+ *******************************************************************************/
+
+
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.DBConnection;
 import model.Member;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 
 public class AddMemberViewController {
 
-    //TODO: Rewrite this class to work with Database
-
-
     private ChocAnSysApp main;
+    private Connection db;
+    private PreparedStatement stmt;
+
+
+
     Stage dialog;
     Member member;
     @FXML private TextField textFieldMemberNumber;
@@ -41,14 +64,16 @@ public class AddMemberViewController {
     @FXML private TextField textFieldMemberStreet;
     @FXML private TextField textFieldMemberCity;
     @FXML private TextField textFieldMemberZipCode;
-    @FXML private TextField textFieldMemberState;
+    @FXML private ComboBox<String> comboBoxMemberState;
     @FXML private ComboBox<String> comboBoxMemberStatus;
 
 
     public void setMain(ChocAnSysApp main, Stage dialog) {
         this.main = main;
         this.dialog = dialog;
-
+        db = DBConnection.connect();
+        main.populateState(comboBoxMemberState);
+        main.populateStatus(comboBoxMemberStatus);
     }
 
     public void confirmBtnHandler() {
@@ -58,18 +83,41 @@ public class AddMemberViewController {
                 textFieldMemberLastName.getText(),
                 textFieldMemberStreet.getText(),
                 textFieldMemberCity.getText(),
-                textFieldMemberState.getText(),
+                comboBoxMemberState.getValue(),
                 textFieldMemberZipCode.getText(),
                 comboBoxMemberStatus.getValue()
-
-
         );
+      try{
+          stmt = db.prepareStatement("insert into members VALUES (?,?,?,?,?,?,?,?,?);");
+          stmt.setInt(1, newMember.getNumber());
+          stmt.setString(2, newMember.getFirstName());
+          stmt.setString(3, newMember.getLastName());
+          stmt.setString(4, newMember.getStreet());
+          stmt.setString(5, newMember.getCity());
+          stmt.setString(6, newMember.getState());
+          stmt.setString(7, newMember.getZipCode());
+          stmt.setString(8, newMember.getStatus());
+          stmt.setInt(9, 0);
+          stmt.executeUpdate();
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setHeaderText("Add New Member");
+          alert.setContentText("Member successfully added.");
+          alert.showAndWait();
+          db.close();
+          dialog.close();
+     }
+      catch(Exception e){
+          System.out.println(e);
+      }
+
 
     }
 
     public void cancelBtnHandler() {
         dialog.close();
     }
+
+
 }
 
 

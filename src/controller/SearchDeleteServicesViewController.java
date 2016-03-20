@@ -40,19 +40,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.DBConnection;
-import model.Member;
-
+import model.Service;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
-public class SearchUpdateMemberViewController {
+public class SearchDeleteServicesViewController {
 
     private ChocAnSysApp main;
     private Stage dialog;
     private Connection db;
-    @FXML private TextField textFieldMemberNumber;
+    @FXML private TextField textFieldServiceCode;
     private Statement stmt;
     private ResultSet rs;
 
@@ -64,53 +62,21 @@ public class SearchUpdateMemberViewController {
         db = DBConnection.connect();
 
     }
-
+    @FXML
     public void lookupBtnHandler(){
         // QUERY THE DB AND STORE INFO TO POPULATE FIELDS
         try{
-            Member member = new Member();
+            Service service = new Service();
             stmt = db.createStatement();
-            rs = stmt.executeQuery("select * from members where id = " + textFieldMemberNumber.getText() + " ;");
-            member.setNumber(rs.getInt("id"));
-            member.setFirstName(rs.getString("fname"));
-            member.setLastName(rs.getString("lname"));
-            member.setStreet(rs.getString("street"));
-            member.setCity(rs.getString("city"));
-            member.setState(rs.getString("state"));
-            member.setZipCode(rs.getString("zip"));
-            member.setStatus(rs.getString("status"));
+            rs = stmt.executeQuery("select * from services where svccode = " + textFieldServiceCode.getText() + " ;");
+            service.setCode(rs.getInt("svccode"));
+            service.setName(rs.getString("svcdescription"));
+            service.setFee(rs.getFloat("fee"));
+            service.setStatus(rs.getString("status"));
 
-
-            //PRINT RESULT SET TO VERIFY CORRECT QUERY
-            ResultSetMetaData rsmd = rs.getMetaData();
-            System.out.println("querying SELECT * FROM XXX");
-            int columnsNumber = rsmd.getColumnCount();
-            while (rs.next()) {
-                for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(",  ");
-                    String columnValue = rs.getString(i);
-                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
-                }
-                System.out.println("");
-            }
-          //END PRINT RESULT SET
-
-            //PRINT MEMBER CONTENTS TO VERIFY
-            System.out.println("ID: " + member.getNumber());
-            System.out.println("FirstName: " + member.getFirstName());
-            System.out.println("LastName: " + member.getLastName());
-            System.out.println("Street: " + member.getStreet());
-            System.out.println("City: " + member.getCity());
-            System.out.println("State: " + member.getState());
-            System.out.println("Zip: " + member.getZipCode());
-            System.out.println("Status: " + member.getStatus());
-            //end print member contents
-
-
-            main.updateMembersWindow(member);
+            main.deleteServicesWindow(service);
             db.close();
             dialog.close();
-
 
 
 
@@ -122,7 +88,7 @@ public class SearchUpdateMemberViewController {
 
 
     }
-
+    @FXML
     public void cancelBtnHandler(){
                 dialog.close();
     }

@@ -20,10 +20,17 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.DBConnection;
 import model.Provider;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class UpdateProviderViewController {
 
@@ -39,31 +46,56 @@ public class UpdateProviderViewController {
     @FXML private TextField textFieldProviderStreet;
     @FXML private TextField textFieldProviderCity;
     @FXML private TextField textFieldProviderZipCode;
-    @FXML private TextField textFieldProviderState;
-    @FXML private Label lblProviderStatus;
+    @FXML private ComboBox<String> comboBoxProviderState;
+    @FXML private ComboBox<String> comboBoxProviderStatus;
+    PreparedStatement stmt;
+    Connection db;
 
-    public void setMain(ChocAnSysApp main, Stage dialog){
+    public void setMain(ChocAnSysApp main, Stage dialog, Provider provider){
         this.main = main;
         this.dialog = dialog;
         this.provider = provider;
+        db = DBConnection.connect();
+        main.populateStatus(comboBoxProviderStatus);
+        main.populateState(comboBoxProviderState);
+        fillProviderDetails(provider);
 
     }
 
     public void confirmBtnHandler(){
-        Provider newMember = new Provider(
-                Integer.parseInt(textFieldProviderNumber.getText()),
-                textFieldProviderFirstName.getText(),
-                textFieldProviderLastName.getText(),
-                textFieldProviderStreet.getText(),
-                textFieldProviderCity.getText(),
-                textFieldProviderState.getText(),
-                textFieldProviderZipCode.getText(),
-                lblProviderStatus.getText()
 
+        try {
+            String sql =    "update providers " +
+                    "set fname = ?," +
+                    "lname = ?," +
+                    "street = ?," +
+                    "city = ?," +
+                    "state = ?," +
+                    "zip = ?," +
+                    "status = ?" +
+                    "where id = " + textFieldProviderNumber.getText();
 
-        );
+            stmt = db.prepareStatement(sql);
+            stmt.setString(1, textFieldProviderFirstName.getText());
+            stmt.setString(2, textFieldProviderLastName.getText());
+            stmt.setString(3, textFieldProviderStreet.getText());
+            stmt.setString(4, textFieldProviderCity.getText());
+            stmt.setString(5, comboBoxProviderState.getValue());
+            stmt.setString(6, textFieldProviderZipCode.getText());
+            stmt.setString(7, comboBoxProviderStatus.getValue());
+            stmt.executeUpdate();
+            db.close();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Update Provider");
+            alert.setContentText("Provider successfully updated.");
+            alert.showAndWait();
+            dialog.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
+
 
     public void cancelBtnHandler(){
         dialog.close();
@@ -74,15 +106,15 @@ public class UpdateProviderViewController {
     Function is called when the user wishes to UPDATE a member, rather than just adding a member
     This function takes the member information that was passed to this controller and pre-populates the text fields
     */
-    public void fillMemberDetails(){
+    public void fillProviderDetails(Provider provider){
         textFieldProviderNumber.setText(String.valueOf(provider.getNumber()));
         textFieldProviderFirstName.setText(provider.getFirstName());
         textFieldProviderLastName.setText(provider.getLastName());
         textFieldProviderStreet.setText(provider.getStreet());
         textFieldProviderCity.setText(provider.getCity());
-        textFieldProviderState.setText(provider.getState());
+        comboBoxProviderState.setValue(provider.getState());
         textFieldProviderZipCode.setText(provider.getZipCode());
-        textFieldProviderState.setText(provider.getStatus());
+        comboBoxProviderStatus.setValue(provider.getStatus());
     }
 
 

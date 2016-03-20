@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -39,16 +38,6 @@
          <children>
             <Label fx:id="lblServiceCode" text="Code:" />
             <Label fx:id="lblServiceName" text="Name:" GridPane.rowIndex="1" />
-            <TextField fx:id="textFieldServiceCode" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="textFieldServiceName" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin>
-            </TextField>
             <Label fx:id="lblStatusTitle" text="Status:" GridPane.columnIndex="2">
                <padding>
                   <Insets right="5.0" />
@@ -59,15 +48,22 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="textFieldServiceFee" layoutX="96.0" layoutY="43.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <opaqueInsets>
-                  <Insets left="20.0" />
-               </opaqueInsets>
+            <Label fx:id="lblServiceFee" text="Fee:" GridPane.rowIndex="2" />
+            <Label fx:id="lblServiceCode" text="Label" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
-            </TextField>
-            <Label fx:id="lblServiceFee" text="Fee:" GridPane.rowIndex="2" />
+            </Label>
+            <Label fx:id="lblServiceName" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="lblServiceFee" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
    </children>

@@ -40,7 +40,7 @@ public class ManageMembersViewController {
     }
 
     public void deleteMemberHandler(){
-        main.deleteMembersWindow();
+        main.searchDeleteMemberWindow();
     }
 
     public void exitMembersHandler(){

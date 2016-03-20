@@ -20,55 +20,82 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.Member;
+import model.DBConnection;
+import model.Provider;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.Optional;
 
 public class DeleteProviderViewController {
 
     //TODO: Rewrite this class to work with Database
-    //TODO: Change Status on form to be updateable
+    //TODO: Change Status on form to be updatable
     //TODO: Add a button to look up the provider you want to delete and prepopulate the fields with query result
 
     private ChocAnSysApp main;
     Stage dialog;
-    Member member;
-    @FXML private TextField textFieldProviderNumber;
-    @FXML private TextField textFieldProviderFirstName;
-    @FXML private TextField textFieldProviderLastName;
-    @FXML private TextField textFieldProviderStreet;
-    @FXML private TextField textFieldProviderCity;
-    @FXML private TextField textFieldProviderZipCode;
-    @FXML private TextField textFieldProviderState;
+    Provider provider;
+    @FXML private Label lblProviderNumber;
+    @FXML private Label lblProviderFirstName;
+    @FXML private Label lblProviderLastName;
+    @FXML private Label lblProviderStreet;
+    @FXML private Label lblProviderCity;
+    @FXML private Label lblProviderZipCode;
+    @FXML private Label lblProviderState;
     @FXML private Label lblProviderStatus;
+    Connection db;
+    PreparedStatement stmt;
 
-    public void setMain(ChocAnSysApp main, Stage dialog){
+    public void setMain(ChocAnSysApp main, Stage dialog, Provider provider){
         this.main = main;
         this.dialog = dialog;
-        this.member = member;
+        this.provider = provider;
+        fillProviderDetails(provider);
+        db = DBConnection.connect();
 
     }
 
     public void confirmBtnHandler(){
-        Member newMember = new Member(
-                Integer.parseInt(textFieldProviderNumber.getText()),
-                textFieldProviderFirstName.getText(),
-                textFieldProviderLastName.getText(),
-                textFieldProviderStreet.getText(),
-                textFieldProviderCity.getText(),
-                textFieldProviderState.getText(),
-                textFieldProviderZipCode.getText(),
-                lblProviderStatus.getText()
+        try{
+            String sql = "delete from providers where id = " + lblProviderNumber.getText();
+            stmt = db.prepareStatement(sql);
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setHeaderText("Delete Provider");
+            confirm.setContentText("Are you sure you want to delete this provider?");
+            Optional<ButtonType> result = confirm.showAndWait();
+            if(result.get() == ButtonType.OK){
+                stmt.execute();
+            } else {
+                dialog.close();
+            }
+            db.close();
+            dialog.close();
 
-
-        );
-
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void cancelBtnHandler(){
         dialog.close();
 
+    }
+
+    public void fillProviderDetails(Provider provider){
+        lblProviderNumber.setText(String.valueOf(provider.getNumber()));
+        lblProviderFirstName.setText(provider.getFirstName());
+        lblProviderLastName.setText(provider.getLastName());
+        lblProviderStreet.setText(provider.getStreet());
+        lblProviderCity.setText(provider.getCity());
+        lblProviderState.setText(provider.getState());
+        lblProviderZipCode.setText(provider.getZipCode());
+        lblProviderStatus.setText(provider.getStatus());
     }
 
 }

@@ -47,7 +47,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
-public class SearchUpdateMemberViewController {
+public class SearchDeleteMemberViewController {
 
     private ChocAnSysApp main;
     private Stage dialog;
@@ -81,36 +81,9 @@ public class SearchUpdateMemberViewController {
             member.setStatus(rs.getString("status"));
 
 
-            //PRINT RESULT SET TO VERIFY CORRECT QUERY
-            ResultSetMetaData rsmd = rs.getMetaData();
-            System.out.println("querying SELECT * FROM XXX");
-            int columnsNumber = rsmd.getColumnCount();
-            while (rs.next()) {
-                for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(",  ");
-                    String columnValue = rs.getString(i);
-                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
-                }
-                System.out.println("");
-            }
-          //END PRINT RESULT SET
-
-            //PRINT MEMBER CONTENTS TO VERIFY
-            System.out.println("ID: " + member.getNumber());
-            System.out.println("FirstName: " + member.getFirstName());
-            System.out.println("LastName: " + member.getLastName());
-            System.out.println("Street: " + member.getStreet());
-            System.out.println("City: " + member.getCity());
-            System.out.println("State: " + member.getState());
-            System.out.println("Zip: " + member.getZipCode());
-            System.out.println("Status: " + member.getStatus());
-            //end print member contents
-
-
-            main.updateMembersWindow(member);
+            main.deleteMembersWindow(member);
             db.close();
             dialog.close();
-
 
 
 

@@ -41,20 +41,21 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.DBConnection;
 import model.Member;
+import model.Provider;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
-public class SearchUpdateMemberViewController {
+public class SearchUpdateProviderViewController {
 
     private ChocAnSysApp main;
     private Stage dialog;
     private Connection db;
-    @FXML private TextField textFieldMemberNumber;
+    @FXML private TextField textFieldProviderNumber;
     private Statement stmt;
-    private ResultSet rs;
+    private ResultSet rs2;
 
 
 
@@ -68,27 +69,27 @@ public class SearchUpdateMemberViewController {
     public void lookupBtnHandler(){
         // QUERY THE DB AND STORE INFO TO POPULATE FIELDS
         try{
-            Member member = new Member();
+            Provider provider = new Provider();
             stmt = db.createStatement();
-            rs = stmt.executeQuery("select * from members where id = " + textFieldMemberNumber.getText() + " ;");
-            member.setNumber(rs.getInt("id"));
-            member.setFirstName(rs.getString("fname"));
-            member.setLastName(rs.getString("lname"));
-            member.setStreet(rs.getString("street"));
-            member.setCity(rs.getString("city"));
-            member.setState(rs.getString("state"));
-            member.setZipCode(rs.getString("zip"));
-            member.setStatus(rs.getString("status"));
+            rs2 = stmt.executeQuery("select * from providers where id = " + textFieldProviderNumber.getText() + " ;");
+            provider.setNumber(rs2.getInt("id"));
+            provider.setFirstName(rs2.getString("fname"));
+            provider.setLastName(rs2.getString("lname"));
+            provider.setStreet(rs2.getString("street"));
+            provider.setCity(rs2.getString("city"));
+            provider.setState(rs2.getString("state"));
+            provider.setZipCode(rs2.getString("zip"));
+            provider.setStatus(rs2.getString("status"));
 
 
             //PRINT RESULT SET TO VERIFY CORRECT QUERY
-            ResultSetMetaData rsmd = rs.getMetaData();
+            ResultSetMetaData rsmd = rs2.getMetaData();
             System.out.println("querying SELECT * FROM XXX");
             int columnsNumber = rsmd.getColumnCount();
-            while (rs.next()) {
+            while (rs2.next()) {
                 for (int i = 1; i <= columnsNumber; i++) {
                     if (i > 1) System.out.print(",  ");
-                    String columnValue = rs.getString(i);
+                    String columnValue = rs2.getString(i);
                     System.out.print(columnValue + " " + rsmd.getColumnName(i));
                 }
                 System.out.println("");
@@ -96,21 +97,18 @@ public class SearchUpdateMemberViewController {
           //END PRINT RESULT SET
 
             //PRINT MEMBER CONTENTS TO VERIFY
-            System.out.println("ID: " + member.getNumber());
-            System.out.println("FirstName: " + member.getFirstName());
-            System.out.println("LastName: " + member.getLastName());
-            System.out.println("Street: " + member.getStreet());
-            System.out.println("City: " + member.getCity());
-            System.out.println("State: " + member.getState());
-            System.out.println("Zip: " + member.getZipCode());
-            System.out.println("Status: " + member.getStatus());
+            System.out.println("ID: " + provider.getNumber());
+            System.out.println("FirstName: " + provider.getFirstName());
+            System.out.println("LastName: " + provider.getLastName());
+            System.out.println("Street: " + provider.getStreet());
+            System.out.println("City: " + provider.getCity());
+            System.out.println("State: " + provider.getState());
+            System.out.println("Zip: " + provider.getZipCode());
+            System.out.println("Status: " + provider.getStatus());
             //end print member contents
 
-
-            main.updateMembersWindow(member);
-            db.close();
+            main.updateProvidersWindow(provider);
             dialog.close();
-
 
 
 
