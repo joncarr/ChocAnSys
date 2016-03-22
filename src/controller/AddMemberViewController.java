@@ -87,7 +87,9 @@ public class AddMemberViewController {
                 textFieldMemberZipCode.getText(),
                 comboBoxMemberStatus.getValue()
         );
-      try{
+
+
+        try{
           stmt = db.prepareStatement("insert into members VALUES (?,?,?,?,?,?,?,?,?);");
           stmt.setInt(1, newMember.getNumber());
           stmt.setString(2, newMember.getFirstName());

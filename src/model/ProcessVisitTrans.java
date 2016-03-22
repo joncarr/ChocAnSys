@@ -19,5 +19,13 @@
 package model;
 
 public class ProcessVisitTrans {
+
+
+
+
+
+
+
+
     
 }

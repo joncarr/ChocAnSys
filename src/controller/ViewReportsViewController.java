@@ -85,7 +85,8 @@ public class ViewReportsViewController {
                 text.setPosition(70,186);
                 text.drawOn(page);
 
-                text.setText("Statement Date: ");
+
+                text.setText("Statement Date: " + SystemSettingViewController.currentDate);
                 text.setPosition(365,186);
                 text.drawOn(page);
 
@@ -172,7 +173,7 @@ public class ViewReportsViewController {
                 text.setPosition(70,202);
                 text.drawOn(page);
 
-                text.setText("Statement Date: mm/dd/yyy");
+                text.setText("Statement Date: " + SystemSettingViewController.currentDate);
                 text.setPosition(450,202);
                 text.drawOn(page);
 
@@ -259,7 +260,7 @@ public class ViewReportsViewController {
                 text.setPosition(125, 132);
                 text.drawOn(page);
 
-                text.setText("Date: mm/dd/yyyy");
+                text.setText("Date: " + SystemSettingViewController.currentDate);
                 text.setPosition(365,156);
                 text.drawOn(page);
 
@@ -417,6 +418,8 @@ public class ViewReportsViewController {
         try {
             FileOutputStream fos = new FileOutputStream("ErrorReport.pdf");
             try {
+
+
                 PDF pdf = new PDF(fos);
                 Font f1 = new Font(pdf, CoreFont.COURIER);
                 f1.setSize(10);

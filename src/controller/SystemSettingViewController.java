@@ -27,7 +27,10 @@ import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+
 
 
 public class SystemSettingViewController {
@@ -45,7 +48,18 @@ public class SystemSettingViewController {
         datePicker.setOnAction(event ->{
             currentDate = datePicker.getValue();
         });
+        // to populate currentDate field when the datePicker is not used
+        if (currentDate == null){
+            datePicker.setValue(LocalDate.now());
+            currentDate = datePicker.getValue();
+
+        }
+
+
+
+
         lblCurrentDir.setText(currentDir);
+        System.out.println(currentDate);
     }
 
     @FXML

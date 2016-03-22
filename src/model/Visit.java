@@ -21,6 +21,11 @@ package model;
 
 import java.sql.Time;
 import java.util.Date;
+import java.time.LocalDate;
+import javafx.scene.control.DatePicker;
+
+
+
 
 public class Visit {
     
@@ -44,6 +49,10 @@ public class Visit {
         this.memberNumber = memNum;
         this.serviceCode = servCode;
         this.comment = comment;
+    }
+
+    public Visit(){
+
     }
     
     //Getters
@@ -75,5 +84,25 @@ public class Visit {
     public String getComment(){
         return comment;
     }
-    
+
+    //Setters
+
+    public DatePicker datePicker;
+    public static LocalDate currentDate;
+
+    public void setPickerDate(){
+
+        datePicker.setOnAction(event-> {
+            Date modDate = new Date(datePicker.getValue().toEpochDay());
+            this.serviceDate = modDate;
+            System.out.println(serviceDate);
+        });
+
+
+
+
+    }
+
+
+
 }
