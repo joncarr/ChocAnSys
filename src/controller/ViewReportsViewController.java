@@ -46,7 +46,7 @@ public class ViewReportsViewController {
         // By: Luis Lopez
 
         try {
-            FileOutputStream fos = new FileOutputStream("MemberReport.pdf");
+            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "MemberReport.pdf");
             try {
                 PDF pdf = new PDF(fos);
                 Font f1 = new Font(pdf, CoreFont.COURIER);
@@ -115,7 +115,7 @@ public class ViewReportsViewController {
                 pdf.close();
 
                 try {
-                    Desktop.getDesktop().open(new File("MemberReport.pdf"));
+                    Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "MemberReport.pdf"));
                 }catch(Exception e){
                     e.printStackTrace();
                 }
@@ -134,7 +134,7 @@ public class ViewReportsViewController {
         // Date updated: 14 March 2016
         // By: Luis Lopez
         try{
-            FileOutputStream fos = new FileOutputStream("ProviderReport.pdf");
+            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf");
             try {
                 PDF pdf = new PDF(fos);
                 Font f1 = new Font(pdf, CoreFont.COURIER);
@@ -219,7 +219,7 @@ public class ViewReportsViewController {
                 text.drawOn(page);
 
                 try {
-                    Desktop.getDesktop().open(new File("ProviderReport.pdf"));
+                    Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf"));
 
                 }catch(Exception e){
                     e.printStackTrace();
@@ -240,7 +240,7 @@ public class ViewReportsViewController {
         // By: Luis Lopez
 
         try{
-            FileOutputStream fos = new FileOutputStream("ProviderReport.pdf");
+            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf");
             try {
                 PDF pdf = new PDF(fos);
                 Font f1 = new Font(pdf, CoreFont.COURIER);
@@ -304,7 +304,7 @@ public class ViewReportsViewController {
 
                 // open pdf
                 try {
-                    Desktop.getDesktop().open(new File("ProviderReport.pdf"));
+                    Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf"));
 
                 }catch(Exception e){
                     e.printStackTrace();
@@ -325,7 +325,7 @@ public class ViewReportsViewController {
 
 
         try{
-            FileOutputStream fos = new FileOutputStream("EFTDataReport.pdf");
+            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "EFTDataReport.pdf");
             PDF pdf = new PDF(fos);
             Font f1 = new Font(pdf, CoreFont.COURIER);
             f1.setSize(10);
@@ -352,7 +352,7 @@ public class ViewReportsViewController {
             text.drawOn(page);
 
             try{
-                Desktop.getDesktop().open( new File("EFTDataReport.pdf"));
+                Desktop.getDesktop().open( new File(SystemSettingViewController.workingDirectory + "\\" + "EFTDataReport.pdf"));
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -370,7 +370,7 @@ public class ViewReportsViewController {
         // Date updated 13 March 16
         // by: Luis Lopez
         try {
-            FileOutputStream fos = new FileOutputStream("AcmeReport.pdf");
+            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "AcmeReport.pdf");
 
             PDF pdf = new PDF(fos);
             Font f1 = new Font(pdf, CoreFont.COURIER);
@@ -398,7 +398,7 @@ public class ViewReportsViewController {
             text.drawOn(page);
 
             try{
-                Desktop.getDesktop().open( new File("AcmeReport.pdf"));
+                Desktop.getDesktop().open( new File(SystemSettingViewController.workingDirectory + "\\" + "AcmeReport.pdf"));
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -416,7 +416,7 @@ public class ViewReportsViewController {
         // By: Luis Lopez
 
         try {
-            FileOutputStream fos = new FileOutputStream("ErrorReport.pdf");
+            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "ErrorReport.pdf");
             try {
 
 

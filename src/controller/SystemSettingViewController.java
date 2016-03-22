@@ -27,8 +27,6 @@ import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 
@@ -80,6 +78,7 @@ public class SystemSettingViewController {
 
         } else {
             lblCurrentDir.setText(workingDirectory.getAbsolutePath());
+            System.out.println(workingDirectory);
         }
     }
 
