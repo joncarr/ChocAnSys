@@ -10,20 +10,25 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/PDFjet-ForJava/PDFjet-ForJava-v5.71/PDFjet.jar!/" />
+          <root url="file://$USER_HOME$/Downloads/PDFjet-ForJava-v5.71" />
         </CLASSES>
-        <JAVADOC />
-        <SOURCES />
+        <JAVADOC>
+          <root url="file://$USER_HOME$/Downloads/PDFjet-ForJava-v5.71/docs/java" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="file://$USER_HOME$/Downloads/PDFjet-ForJava-v5.71" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/Downloads/PDFjet-ForJava-v5.71" recursive="false" />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/sqlite-jdbc-3.8.11.2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.8.11.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$USER_HOME$/Desktop/sqlite-jdbc-3.8.11.2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.8.11.2.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

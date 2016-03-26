@@ -456,6 +456,7 @@ public class ChocAnSysApp extends Application {
             FXMLLoader loader = new FXMLLoader(ChocAnSysApp.class.getResource("../view/ViewReportsView.fxml"));
             Stage dialog = new Stage();
             dialog.setTitle("Chocoholics Anonymous System");
+            dialog.initModality(Modality.APPLICATION_MODAL);
             AnchorPane pane = loader.load();
 
             ViewReportsViewController controller = loader.getController();
