@@ -47,16 +47,25 @@ public class SystemSettingViewController {
             currentDate = datePicker.getValue();
         });
         // to populate currentDate field when the datePicker is not used
+
+
         if (currentDate == null){
             datePicker.setValue(LocalDate.now());
             currentDate = datePicker.getValue();
 
         }
 
+        if (workingDirectory == null){
 
+            workingDirectory = new File(currentDir);
+            System.out.println(workingDirectory);
+
+        }
 
 
         lblCurrentDir.setText(currentDir);
+
+
         System.out.println(currentDate);
     }
 
@@ -69,6 +78,8 @@ public class SystemSettingViewController {
     private void changeDirBtnHandler(){
         DirectoryChooser directoryChooser = new DirectoryChooser();
         workingDirectory = directoryChooser.showDialog(new Stage());
+
+
         if (workingDirectory == null){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");

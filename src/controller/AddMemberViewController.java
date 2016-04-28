@@ -44,6 +44,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.DBConnection;
 import model.Member;
+
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -108,11 +110,19 @@ public class AddMemberViewController {
           db.close();
           dialog.close();
      }
-      catch(Exception e){
-          System.out.println(e);
+      catch(Exception e) {
+          e.printStackTrace();
+          /*try{
+              FileWriter fw = new FileWriter("ErrorLog.txt");
+              PrintWriter pw = new PrintWriter(fw);
+              e.printStackTrace(pw);
+
+          }catch(IOException er){
+              er.printStackTrace();
+          }
+          */
+
       }
-
-
     }
 
     public void cancelBtnHandler() {

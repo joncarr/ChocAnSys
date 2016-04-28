@@ -45,6 +45,9 @@ public class ViewReportsViewController {
         // Date updated: 15 March 16
         // By: Luis Lopez
 
+        main.MemberReportLookupWindow();
+
+        /*
         try {
             FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "MemberReport.pdf");
             try {
@@ -126,6 +129,8 @@ public class ViewReportsViewController {
         }catch(IOException e) {
             e.printStackTrace();
         }
+        */
+
 
     }
 
@@ -133,6 +138,10 @@ public class ViewReportsViewController {
     public void providerReportBtnHandler(){
         // Date updated: 14 March 2016
         // By: Luis Lopez
+
+        main.ProviderReportLookupWindow();
+
+        /*
         try{
             FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf");
             try {
@@ -232,6 +241,8 @@ public class ViewReportsViewController {
         }catch(IOException e){
             e.printStackTrace();
         }
+        */
+
     }
 
     @FXML
@@ -239,8 +250,11 @@ public class ViewReportsViewController {
         // Date Updated 13 March 16
         // By: Luis Lopez
 
+
+
+
         try{
-            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf");
+            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "ManagerReport.pdf");
             try {
                 PDF pdf = new PDF(fos);
                 Font f1 = new Font(pdf, CoreFont.COURIER);
@@ -318,6 +332,9 @@ public class ViewReportsViewController {
         }catch(IOException e){
             e.printStackTrace();
         }
+        //end of new insert of validation window
+
+
     }
 
     @FXML

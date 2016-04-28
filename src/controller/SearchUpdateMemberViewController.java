@@ -70,6 +70,7 @@ public class SearchUpdateMemberViewController {
         try{
             Member member = new Member();
             stmt = db.createStatement();
+
             rs = stmt.executeQuery("select * from members where id = " + textFieldMemberNumber.getText() + " ;");
             member.setNumber(rs.getInt("id"));
             member.setFirstName(rs.getString("fname"));

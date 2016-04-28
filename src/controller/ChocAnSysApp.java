@@ -34,9 +34,14 @@ import model.Provider;
 import model.Service;
 
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ChocAnSysApp extends Application {
 
@@ -161,6 +166,8 @@ public class ChocAnSysApp extends Application {
         }
     }
 
+
+
     public void searchUpdateMemberWindow() {
         try {
 
@@ -180,6 +187,55 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace();
         }
     }
+
+    public void MemberReportLookupWindow(){
+        try{
+            FXMLLoader loader = new FXMLLoader(ChocAnSysApp.class.getResource("../view/MemberReportLookupView.fxml"));
+            AnchorPane pane =  loader.load();
+
+            MemberReportLookupViewController controller = loader.getController();
+            Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            controller.setMain(this, dialog);
+            dialog.setTitle("Chocoholics Anonymous System");
+            dialog.setScene(new Scene(pane, 400, 300));
+            dialog.show();
+
+        }catch(IOException e){
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public void ProviderReportLookupWindow(){
+        try{
+            FXMLLoader loader = new FXMLLoader(ChocAnSysApp.class.getResource("../view/ProviderReportLookupView.fxml"));
+            AnchorPane pane = loader.load();
+
+            ProviderReportLookupController controller = loader.getController();
+            Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            controller.setMain(this, dialog);
+            dialog.setTitle("Chocoholics Anonymous System");
+            dialog.setScene(new Scene(pane, 400, 300));
+            dialog.show();
+
+
+
+
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+    }
+
 
     public void addMembersWindow() {
         try {
@@ -562,6 +618,7 @@ public class ChocAnSysApp extends Application {
     }
 
     public static void main(String[] args) {
+
         launch(args);
     }
 }
