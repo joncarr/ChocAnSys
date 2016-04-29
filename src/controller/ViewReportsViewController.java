@@ -23,10 +23,17 @@ package controller;
 import com.pdfjet.*;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import model.DBConnection;
+import model.Provider;
+import model.Service;
+import model.Visit;
+
 import java.awt.Desktop;
 
 import java.io.*;
-
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class ViewReportsViewController {
@@ -34,10 +41,24 @@ public class ViewReportsViewController {
     ChocAnSysApp main;
     Stage dialog;
     String eol = System.getProperty("line.separator");
+    private Connection db;
     public void setMain(ChocAnSysApp main, Stage dialog){
         this.main = main;
         this.dialog = dialog;
+        db = DBConnection.connect();
+
     }
+
+    private Statement stmtVisit;
+    private Statement stmtProvider;
+    private Statement stmtService;
+    private Statement Rowstmt;
+
+    private ResultSet VisitRS;
+    private ResultSet ProviderRS;
+    private ResultSet ServiceRS;
+    private ResultSet RowRS;
+
 
     @FXML
     public void membersReportBtnHandler(){
@@ -46,92 +67,6 @@ public class ViewReportsViewController {
         // By: Luis Lopez
 
         main.MemberReportLookupWindow();
-
-        /*
-        try {
-            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "MemberReport.pdf");
-            try {
-                PDF pdf = new PDF(fos);
-                Font f1 = new Font(pdf, CoreFont.COURIER);
-                f1.setSize(10);
-                Page page = new Page(pdf, A4.PORTRAIT);
-
-                TextLine text = new TextLine(f1, "         1         2         3         4         5         6         7         8");
-                text.setPosition(70,72);
-                text.drawOn(page);
-
-                text.setText("12345678901234567890123456789012345678901234567890123456789012345678901234567890");
-                text.setPosition(70, 82);
-                text.drawOn(page);
-
-                text.setText("Chocoholics Anonymous");
-                text.setPosition(238, 114);
-                text.drawOn(page);
-
-                text.setText("Member Benefits Summary");
-                text.setPosition(232, 126);
-                text.drawOn(page);
-
-                text.setText("(Member Name)");
-                text.setPosition(70, 162);
-                text.drawOn(page);
-
-                text.setText("Member Number: ");
-                text.setPosition(365, 162);
-                text.drawOn(page);
-
-                text.setText("(Street Address)");
-                text.setPosition(70,174);
-                text.drawOn(page);
-
-                text.setText("(City, State, ZIP code)");
-                text.setPosition(70,186);
-                text.drawOn(page);
-
-
-                text.setText("Statement Date: " + SystemSettingViewController.currentDate);
-                text.setPosition(365,186);
-                text.drawOn(page);
-
-                text.setText("Page: ##");
-                text.setPosition(365,210);
-                text.drawOn(page);
-
-                text.setText("Date         Service                    Provider");
-                text.setPosition(70,234);
-                text.drawOn(page);
-
-                text.setText("------------------------------------------------------------------------------");
-                text.setPosition(70,250);
-                text.drawOn(page);
-
-                // dates needed from Database
-                text.setText("mm/dd/yyyy   XXXXXXXXXXXXXXXXXX         XXXXXXXXXXXXXXXXX");
-                text.setPosition(70,265);
-                text.drawOn(page);
-                text.setPosition(70,289);
-                text.drawOn(page);
-                text.setPosition(70,313);
-                text.drawOn(page);
-
-                pdf.flush();
-                pdf.close();
-
-                try {
-                    Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "MemberReport.pdf"));
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }catch(Exception e) {
-                e.printStackTrace();
-            }
-
-        }catch(IOException e) {
-            e.printStackTrace();
-        }
-        */
-
-
     }
 
     @FXML
@@ -140,108 +75,6 @@ public class ViewReportsViewController {
         // By: Luis Lopez
 
         main.ProviderReportLookupWindow();
-
-        /*
-        try{
-            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf");
-            try {
-                PDF pdf = new PDF(fos);
-                Font f1 = new Font(pdf, CoreFont.COURIER);
-                f1.setSize(10);
-                Page page = new Page(pdf, A4.LANDSCAPE);
-
-                TextLine text = new TextLine(f1, "         1         2         3         4         5         6         7         8         9    ");
-                text.setPosition(70,72);
-                text.drawOn(page);
-
-                text.setText("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
-                text.setPosition(70, 82);
-                text.drawOn(page);
-
-                text.setText("Chocoholics Anonymous");
-                text.setPosition(276, 130);
-                text.drawOn(page);
-
-                text.setText("Provider Claims Summary");
-                text.setPosition(270, 142);
-                text.drawOn(page);
-
-                text.setText("(Provider Name)");
-                text.setPosition(70,178);
-                text.drawOn(page);
-
-                text.setText("Provider Number: ");
-                text.setPosition(450,178);
-                text.drawOn(page);
-
-                text.setText("(Street Address)");
-                text.setPosition(70,190);
-                text.drawOn(page);
-
-                text.setText("(City, State, ZIP Code)");
-                text.setPosition(70,202);
-                text.drawOn(page);
-
-                text.setText("Statement Date: " + SystemSettingViewController.currentDate);
-                text.setPosition(450,202);
-                text.drawOn(page);
-
-                text.setText("Page: ##");
-                text.setPosition(500,262);
-                text.drawOn(page);
-
-                text.setText("Service      Service                                           Claim Submitted");
-                text.setPosition(70, 295);
-                text.drawOn(page);
-
-                text.setText("Date         Code     Member Nbr & Name                       Date       Time      Fee Paid");
-                text.setPosition(70, 307);
-                text.drawOn(page);
-
-                text.setText("----------------------------------------------------------------------------------------------");
-                text.setPosition(70,320);
-                text.drawOn(page);
-
-                // dates needed from Database
-                text.setText("mm/dd/yyyy   XXXXXX   XXXXXXXXX   XXXXXXXXXXXXXXXXXXXXXXXXX   mm/dd/yyyy hh:mm:ss  $XXX.XX");
-                text.setPosition(70,334);
-                text.drawOn(page);
-                text.setPosition(70,358);
-                text.drawOn(page);
-                text.setPosition(70,382);
-                text.drawOn(page);
-
-                text.setText("XXX");
-                text.setPosition(70, 440);
-                text.drawOn(page);
-
-                text.setText("Total consultation claims submitted");
-                text.setPosition(150, 440);
-                text.drawOn(page);
-
-                text.setText("$XX,XXX.XX");
-                text.setPosition(70,455);
-                text.drawOn(page);
-
-                text.setText("Total Fees Paid");
-                text.setPosition(150, 455);
-                text.drawOn(page);
-
-                try {
-                    Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf"));
-
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-                pdf.flush();
-                pdf.close();
-            }catch(Exception e) {
-                e.printStackTrace();
-            }
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        */
 
     }
 
@@ -260,11 +93,8 @@ public class ViewReportsViewController {
                 Font f1 = new Font(pdf, CoreFont.COURIER);
                 f1.setSize(10);
                 Page page = new Page(pdf, A4.PORTRAIT);
-                TextLine text = new TextLine(f1, "         1         2         3         4         5         6         7         8");
-                text.setPosition(70,72);
-                text.drawOn(page);
-                //                     1         2         3         4         5         6         7         8
-                text.setText("12345678901234567890123456789012345678901234567890123456789012345678901234567890");
+                TextLine text = new TextLine(f1, "");
+
 
 
                 text.setPosition(70, 84);
@@ -278,7 +108,7 @@ public class ViewReportsViewController {
                 text.setPosition(365,156);
                 text.drawOn(page);
 
-                text.setText("Page: ##");
+                text.setText("Page: 01");
                 text.setPosition(365, 180);
                 text.drawOn(page);
 
@@ -290,31 +120,120 @@ public class ViewReportsViewController {
                 text.setPosition(70, 219);
                 text.drawOn(page);
 
-                text.setText("XXXXXXXXX      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  XXX  $XX,XXX.XX");
-                text.setPosition(70, 246);
+                // start data output at 70, 246
+
+                // Get size of table for providers
+                Statement Rowstmt = db.createStatement();
+                ResultSet RowRS = Rowstmt.executeQuery("SELECT COUNT(*) AS rowcount FROM providers");
+                RowRS.next();
+                int count = RowRS.getInt("rowcount") ;
+                RowRS.close() ;
+
+
+                Provider provider = new Provider();
+                stmtProvider = db.createStatement();
+
+                Visit visit = new Visit();
+                stmtVisit = db.createStatement();
+                int movedown = 215;
+
+                Service service = new Service();
+                stmtService = db.createStatement();
+                int flag = 0;
+                int hitCount = 0;
+                int totalFees = 0;
+                int fee = 0;
+                int sumOfClaims = 0;
+                int numberProviders = 0;
+                int numberOfClaims = 0;
+                ProviderRS = stmtProvider.executeQuery("SELECT * FROM PROVIDERS");
+                while(ProviderRS.next()){
+                    //stmtProvider = db.createStatement();
+                    provider.setNumber(ProviderRS.getInt("id"));
+
+                    VisitRS = stmtVisit.executeQuery("select * from visits where provnumber = "
+                            + provider.getNumber() + " ;");
+                    while(VisitRS.next()){
+
+                        System.out.println(provider.getNumber());
+                        visit.setServiceCode(VisitRS.getInt("svccode"));
+                        provider.setNumber(ProviderRS.getInt("id"));
+                        provider.setFirstName(ProviderRS.getString("fname"));
+                        provider.setLastName(ProviderRS.getString("lname"));
+                        ServiceRS = stmtService.executeQuery("select * from services where svccode ="
+                                + visit.getServiceCode() + " ;");
+                        service.setFee(ServiceRS.getInt("fee"));
+                        totalFees+=service.getFee();
+
+
+                        flag = 1;
+                        hitCount++;
+
+                    }
+                    if ( flag == 1){
+                        numberOfClaims+=hitCount;
+                        sumOfClaims+=totalFees;
+                        text.setText("" + provider.getNumber());
+                        text.setPosition(70, movedown+=20);
+                        text.drawOn(page);
+
+
+                        text.setText(provider.getFirstName() + " " + provider.getLastName());
+                        text.setPosition(160, movedown);
+                        text.drawOn(page);
+
+                        text.setText("" + hitCount);
+                        text.setPosition(360, movedown);
+                        text.drawOn(page);
+
+                        text.setText("$" + totalFees);
+                        text.setPosition(400, movedown);
+                        text.drawOn(page);
+                        numberProviders++;
+                        sumOfClaims+=sumOfClaims;
+                        flag = 0;
+                        hitCount = 0;
+                        totalFees = 0;
+                    }
+
+
+
+                }
+
+
+
+
+
+                text.setText("" + numberProviders);
+                text.setPosition(70, 430);
                 text.drawOn(page);
 
-                text.setPosition(70, 258);
-                text.drawOn(page);
-                text.setPosition(70, 270);
-                text.drawOn(page);
-                text.setPosition(70, 282);
+
+                text.setText("Providers Paid");
+                text.setPosition(130, 430);
                 text.drawOn(page);
 
-                text.setText("XXXX   Providers Paid");
-                text.setPosition(70, 382);
+                text.setText("" + numberOfClaims);
+                text.setPosition(70, 445);
                 text.drawOn(page);
 
-                String test;
-                test = "XXXX   Claims Submitted";
-                text.setText( test );
-                text.setPosition(70, 394);
+                text.setText("Claims Submitted");
+                text.setPosition(130, 445);
                 text.drawOn(page);
 
-                test = "$###,###.##  Total Payments Paid";
-                text.setText(test);
-                text.setPosition(70, 406);
+                text.setText("$" + sumOfClaims);
+                text.setPosition(70, 460);
                 text.drawOn(page);
+
+                text.setText("Total Payment Paid");
+                text.setPosition(130, 460);
+                text.drawOn(page);
+
+
+
+
+
+
 
                 // open pdf
                 try {

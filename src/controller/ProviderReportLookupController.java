@@ -69,13 +69,8 @@ public class ProviderReportLookupController {
                         f1.setSize(10);
                         Page page = new Page(pdf, A4.LANDSCAPE);
 
-                        TextLine text = new TextLine(f1, "         1         2         3         4         5         6         7         8         9    ");
-                        text.setPosition(70,72);
-                        text.drawOn(page);
+                        TextLine text = new TextLine(f1, "");
 
-                        text.setText("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
-                        text.setPosition(70, 82);
-                        text.drawOn(page);
 
                         text.setText("Chocoholics Anonymous");
                         text.setPosition(276, 130);
@@ -105,7 +100,7 @@ public class ProviderReportLookupController {
                         text.setPosition(450,202);
                         text.drawOn(page);
 
-                        text.setText("Page: ##");
+                        text.setText("Page: 01");
                         text.setPosition(500,262);
                         text.drawOn(page);
 

@@ -44,7 +44,7 @@ public class ProcessVisitViewController {
     private Statement stmt;
     private PreparedStatement pstmt;
     private ResultSet rs;
-    private DateFormat tf = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat tf = new SimpleDateFormat("yyyy-MM-dd");
 
 
     @FXML private DatePicker datePickerServiceDate;
@@ -67,6 +67,7 @@ public class ProcessVisitViewController {
         datePickerServiceDate.setValue(LocalDate.now());    //sets date picker to current date
         datePickerServiceDate.setOnAction(event -> {        //
             serviceDate = datePickerServiceDate.getValue(); //service date listener for changing date
+            //tf.format(serviceDate);
             //System.out.println(serviceDate);              //
         });
 
@@ -101,8 +102,12 @@ public class ProcessVisitViewController {
     @FXML
     public void submitClaimBtnHandler(){
 
+
+
         String servDate = datePickerServiceDate.getValue().toString();
         String dateEntered = datePickerServiceDate.getValue().toString();
+        System.out.println("time 1: " + servDate);
+        System.out.println("time 2: " + dateEntered);
 
 
         Visit visit = new Visit(
@@ -115,8 +120,8 @@ public class ProcessVisitViewController {
 
         try {
             pstmt = db.prepareStatement("insert into visits VALUES (?,?,?,?,?,?);");
-            pstmt.setDate(1, java.sql.Date.valueOf(datePickerServiceDate.getValue()));
-            pstmt.setDate(2, java.sql.Date.valueOf(datePickerServiceDate.getValue()));
+            pstmt.setString(1, servDate);
+            pstmt.setString(2, dateEntered);
             pstmt.setInt(3, visit.getProviderNumber());
             pstmt.setInt(4, visit.getMemberNumber());
             pstmt.setInt(5, visit.getServiceCode());

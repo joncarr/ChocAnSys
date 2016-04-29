@@ -76,13 +76,8 @@ public class MemberReportLookupViewController {
                         f1.setSize(10);
                         Page page = new Page(pdf, A4.PORTRAIT);
 
-                        TextLine text = new TextLine(f1, "         1         2         3         4         5         6         7         8");
-                        text.setPosition(70,72);
-                        text.drawOn(page);
+                        TextLine text = new TextLine(f1, "");
 
-                        text.setText("12345678901234567890123456789012345678901234567890123456789012345678901234567890");
-                        text.setPosition(70, 82);
-                        text.drawOn(page);
 
                         text.setText("Chocoholics Anonymous");
                         text.setPosition(238, 114);
@@ -113,7 +108,7 @@ public class MemberReportLookupViewController {
                         text.setPosition(365,186);
                         text.drawOn(page);
 
-                        text.setText("Page: ##");
+                        text.setText("Page: 01");
                         text.setPosition(365,210);
                         text.drawOn(page);
 
