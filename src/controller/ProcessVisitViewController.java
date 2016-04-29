@@ -101,8 +101,8 @@ public class ProcessVisitViewController {
     @FXML
     public void submitClaimBtnHandler(){
 
-        String servDate = tf.format(datePickerServiceDate.getValue().toString());
-        String dateEntered = tf.format(datePickerServiceDate.getValue().toString());
+        String servDate = datePickerServiceDate.getValue().toString();
+        String dateEntered = datePickerServiceDate.getValue().toString();
 
 
         Visit visit = new Visit(
