@@ -20,6 +20,8 @@
 package model;
 
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.time.LocalDate;
 import javafx.scene.control.DatePicker;
@@ -31,7 +33,7 @@ public class Visit {
     
     private Date transactionDate;
     private Time transactionTime;
-    private Date serviceDate;
+    private String serviceDate;
     private int providerNumber;
     private int memberNumber;
     private int serviceCode;
@@ -39,7 +41,7 @@ public class Visit {
     
     //Constructors
     
-    public Visit(Date transDate, Time transTime, Date servDate,
+    public Visit(Date transDate, Time transTime, String servDate,
             int provNum, int memNum, int servCode, String comment){
         
         this.transactionDate = transDate;
@@ -64,8 +66,8 @@ public class Visit {
     public Time getTransactionTime(){
         return transactionTime;
     }
-    
-    public Date getServiceDate(){
+
+    public String getServiceDate(){
         return serviceDate;
     }
     
@@ -87,6 +89,17 @@ public class Visit {
 
     //Setters
 
+    public void setProviderNumber(int provNumber){ this.providerNumber = provNumber; }
+
+    public void setMemberNumber (int mbrNumber){ this.memberNumber = mbrNumber; }
+
+    public void setServiceCode (int svcCode ){ this.serviceCode = svcCode; }
+
+    public void setServiceDate( String svcDate ){ this.serviceDate = svcDate; }
+
+
+
+
     public DatePicker datePicker;
     public static LocalDate currentDate;
 
@@ -94,7 +107,12 @@ public class Visit {
 
         datePicker.setOnAction(event-> {
             Date modDate = new Date(datePicker.getValue().toEpochDay());
-            this.serviceDate = modDate;
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String date = df.format(modDate);
+
+
+
+            this.serviceDate = date;
             System.out.println(serviceDate);
         });
 

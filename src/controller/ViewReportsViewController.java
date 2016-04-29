@@ -318,7 +318,7 @@ public class ViewReportsViewController {
 
                 // open pdf
                 try {
-                    Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf"));
+                    Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "ManagerReport.pdf"));
 
                 }catch(Exception e){
                     e.printStackTrace();
