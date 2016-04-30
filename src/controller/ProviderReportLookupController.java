@@ -23,7 +23,8 @@ public class ProviderReportLookupController {
     private ChocAnSysApp main;
     private Stage dialog;
     private Connection db;
-    @FXML private TextField TextFieldProviderNumber;
+    @FXML
+    private TextField TextFieldProviderNumber;
     private Statement stmt;
     private Statement Visitstmt;
     private Statement Servicestmt;
@@ -41,17 +42,17 @@ public class ProviderReportLookupController {
 
     }
 
-    public void btnCancelHandler(){
+    public void btnCancelHandler() {
         dialog.close();
     }
 
-    public void btnProviderNumberHandler(){
-        try{
+    public void btnProviderNumberHandler() {
+        try {
             Provider provider = new Provider();
             stmt = db.createStatement();
             rs2 = stmt.executeQuery("select * from providers where id = " + TextFieldProviderNumber.getText() + " ;");
 
-            if (rs2.next()){
+            if (rs2.next()) {
                 provider.setNumber(rs2.getInt("id"));
                 provider.setFirstName(rs2.getString("fname"));
                 provider.setLastName(rs2.getString("lname"));
@@ -63,7 +64,7 @@ public class ProviderReportLookupController {
 
                 String filename = provider.getNumber() + "-" + "ProviderReport.pdf";
 
-                try{
+                try {
                     FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + filename);
                     try {
                         PDF pdf = new PDF(fos);
@@ -83,27 +84,27 @@ public class ProviderReportLookupController {
                         text.drawOn(page);
 
                         text.setText(provider.getFirstName() + " " + provider.getLastName());
-                        text.setPosition(70,178);
+                        text.setPosition(70, 178);
                         text.drawOn(page);
 
                         text.setText("Provider Number: " + provider.getNumber());
-                        text.setPosition(450,178);
+                        text.setPosition(450, 178);
                         text.drawOn(page);
 
                         text.setText(provider.getStreet());
-                        text.setPosition(70,190);
+                        text.setPosition(70, 190);
                         text.drawOn(page);
 
                         text.setText(provider.getCity() + " " + provider.getState() + " " + provider.getZipCode());
-                        text.setPosition(70,202);
+                        text.setPosition(70, 202);
                         text.drawOn(page);
 
                         text.setText("Statement Date: " + SystemSettingViewController.currentDate);
-                        text.setPosition(450,202);
+                        text.setPosition(450, 202);
                         text.drawOn(page);
 
                         text.setText("Page: 01");
-                        text.setPosition(500,262);
+                        text.setPosition(500, 262);
                         text.drawOn(page);
 
                         text.setText("Service      Service                                           Claim Submitted");
@@ -115,7 +116,7 @@ public class ProviderReportLookupController {
                         text.drawOn(page);
 
                         text.setText("----------------------------------------------------------------------------------------------");
-                        text.setPosition(70,320);
+                        text.setPosition(70, 320);
                         text.drawOn(page);
 
 
@@ -128,7 +129,7 @@ public class ProviderReportLookupController {
                         int movedown = 340;
                         int claimscount = 0;
                         int totaldollaramount = 0;
-                        while( VisitRS.next()){
+                        while (VisitRS.next()) {
 
 
                             visit.setServiceDate(VisitRS.getString("svcdate"));
@@ -143,7 +144,7 @@ public class ProviderReportLookupController {
                             ServiceRS = Servicestmt.executeQuery("select * from services where svccode = "
                                     + visit.getServiceCode() + " ;");
                             service.setFee(ServiceRS.getInt("fee"));
-                            totaldollaramount+=service.getFee();
+                            totaldollaramount += service.getFee();
 
 
                             Member member = new Member();
@@ -158,35 +159,30 @@ public class ProviderReportLookupController {
                             text.drawOn(page);
 
                             text.setText("" + visit.getServiceCode());
-                            text.setPosition(moveright+78, movedown);
+                            text.setPosition(moveright + 78, movedown);
                             text.drawOn(page);
 
                             text.setText("" + visit.getMemberNumber());
-                            text.setPosition(moveright+131, movedown);
+                            text.setPosition(moveright + 131, movedown);
                             text.drawOn(page);
 
                             text.setText("" + member.getFirstName() + " " + member.getLastName() + ".");
-                            text.setPosition(moveright+200, movedown);
+                            text.setPosition(moveright + 200, movedown);
                             text.drawOn(page);
 
                             text.setText("" + visit.getTransactionDate());
-                            text.setPosition(moveright+380, movedown);
+                            text.setPosition(moveright + 380, movedown);
                             text.drawOn(page);
 
                             text.setText("" + service.getFee());
-                            text.setPosition(moveright+500, movedown);
+                            text.setPosition(moveright + 500, movedown);
                             text.drawOn(page);
-
-
-
 
 
                             movedown += 20;
 
 
                         }
-
-
 
 
                         text.setText("" + claimscount);
@@ -198,7 +194,7 @@ public class ProviderReportLookupController {
                         text.drawOn(page);
 
                         text.setText("" + totaldollaramount);
-                        text.setPosition(70,535);
+                        text.setPosition(70, 535);
                         text.drawOn(page);
 
                         text.setText("Total Fees Paid");
@@ -208,98 +204,77 @@ public class ProviderReportLookupController {
                         try {
                             Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + filename));
 
-                        }catch(Exception e){
+                        } catch (Exception e) {
                             // print errors to error log
 
                             StringWriter sw = new StringWriter();
                             e.printStackTrace(new PrintWriter(sw));
                             String exceptionAsString = sw.toString();
 
-                            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                                BufferedWriter bw = new BufferedWriter(fw);
-                                PrintWriter out = new PrintWriter(bw))
-                            {
+                            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                                 BufferedWriter bw = new BufferedWriter(fw);
+                                 PrintWriter out = new PrintWriter(bw)) {
                                 out.println(exceptionAsString);
-                            }catch(IOException er){
+                            } catch (IOException er) {
                                 er.printStackTrace();
                             }
                         }
                         pdf.flush();
                         pdf.close();
-                    }catch(Exception e) {
+                    } catch (Exception e) {
                         // print errors to error log
 
                         StringWriter sw = new StringWriter();
                         e.printStackTrace(new PrintWriter(sw));
                         String exceptionAsString = sw.toString();
 
-                        try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                            BufferedWriter bw = new BufferedWriter(fw);
-                            PrintWriter out = new PrintWriter(bw))
-                        {
+                        try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                             BufferedWriter bw = new BufferedWriter(fw);
+                             PrintWriter out = new PrintWriter(bw)) {
                             out.println(exceptionAsString);
-                        }catch(IOException er){
+                        } catch (IOException er) {
                             er.printStackTrace();
                         }
                     }
-                }catch(IOException e){
+                } catch (IOException e) {
                     // print errors to error log
 
                     StringWriter sw = new StringWriter();
                     e.printStackTrace(new PrintWriter(sw));
                     String exceptionAsString = sw.toString();
 
-                    try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                        BufferedWriter bw = new BufferedWriter(fw);
-                        PrintWriter out = new PrintWriter(bw))
-                    {
+                    try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                         BufferedWriter bw = new BufferedWriter(fw);
+                         PrintWriter out = new PrintWriter(bw)) {
                         out.println(exceptionAsString);
-                    }catch(IOException er){
+                    } catch (IOException er) {
                         er.printStackTrace();
                     }
                 }
 
 
-
-
             }
 
 
-
-
             dialog.close();
-        }catch(Exception e ){
+        } catch (Exception e) {
             // print errors to error log
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
 
 
 }

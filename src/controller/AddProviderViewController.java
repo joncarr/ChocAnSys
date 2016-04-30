@@ -1,20 +1,35 @@
 /*******************************************************************************
- *******************************************************************************
- *******************************************************************************
- File: AddProviderViewController.java
- Project: IntelliJ IDEA 15.0
- Assignment: Chocoholics Anonymous System
- University: McMurry University
- Course: COSC–4360 Spring 2016
- Instructor: Mr. Brozovic
- Programmer: Jon Carr
- Date: January 13, 2016
- Update by: Additional coder’s name
- Updated: Date code was updated
- Compiler: NetBeans IDE Java SE
- Description: Class Definitions for Provider class
- ********************************************************************************
- ********************************************************************************
+ * ******************************************************************************
+ * ******************************************************************************
+ * File: AddProviderViewController.java
+ * Project: IntelliJ IDEA 15.0
+ * Assignment: Chocoholics Anonymous System
+ * University: McMurry University
+ * Course: COSC–4360 Spring 2016
+ * Instructor: Mr. Brozovic
+ * Programmer: Jon Carr
+ * Date: January 13, 2016
+ * Update by: Additional coder’s name
+ * Updated: Date code was updated
+ * Compiler: NetBeans IDE Java SE
+ * Description: Class Definitions for Provider class
+ * *******************************************************************************
+ * *******************************************************************************
+ * <p>
+ * ******************************************************************************
+ * ******************************************************************************
+ * SQLlite Database providers column names:
+ * 1: id
+ * 2: fname
+ * 3: lname
+ * 4: street
+ * 5: city
+ * 6: state
+ * 7: zip
+ * 8: status
+ * 9: totalvisits
+ * *******************************************************************************
+ * *******************************************************************************
  *******************************************************************************/
 
 /*******************************************************************************
@@ -57,14 +72,22 @@ public class AddProviderViewController {
     Provider provider;
     PreparedStatement stmt;
     Connection db;
-    @FXML private TextField textFieldProviderNumber;
-    @FXML private TextField textFieldProviderFirstName;
-    @FXML private TextField textFieldProviderLastName;
-    @FXML private TextField textFieldProviderStreet;
-    @FXML private TextField textFieldProviderCity;
-    @FXML private TextField textFieldProviderZipCode;
-    @FXML private ComboBox<String> comboBoxProviderState;
-    @FXML private ComboBox<String> comboBoxProviderStatus;
+    @FXML
+    private TextField textFieldProviderNumber;
+    @FXML
+    private TextField textFieldProviderFirstName;
+    @FXML
+    private TextField textFieldProviderLastName;
+    @FXML
+    private TextField textFieldProviderStreet;
+    @FXML
+    private TextField textFieldProviderCity;
+    @FXML
+    private TextField textFieldProviderZipCode;
+    @FXML
+    private ComboBox<String> comboBoxProviderState;
+    @FXML
+    private ComboBox<String> comboBoxProviderStatus;
 
 
     public void setMain(ChocAnSysApp main, Stage dialog) {
@@ -89,7 +112,7 @@ public class AddProviderViewController {
                 textFieldProviderZipCode.getText(),
                 comboBoxProviderStatus.getValue()
         );
-        try{
+        try {
             stmt = db.prepareStatement("insert into providers VALUES (?,?,?,?,?,?,?,?,?);");
             stmt.setInt(1, newProvider.getNumber());
             stmt.setString(2, newProvider.getFirstName());
@@ -107,20 +130,18 @@ public class AddProviderViewController {
             alert.showAndWait();
             db.close();
             dialog.close();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             // print errors to error log
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }

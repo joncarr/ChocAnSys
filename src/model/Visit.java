@@ -1,20 +1,20 @@
 /*******************************************************************************
- *******************************************************************************
- *******************************************************************************
- File: Visit.java
- Project: IntelliJ IDEA 15.0
- Assignment: Chocoholics Anonymous System
- University: McMurry University
- Course: COSC–4360 Spring 2016
- Instructor: Mr. Brozovic
- Programmer: Jon Carr
- Date: January 13, 2016
- Update by: Additional coder’s name
- Updated: Date code was updated
- Compiler: NetBeans IDE Java SE
- Description: Class Definitions for EFTReport class
- ********************************************************************************
- ********************************************************************************
+ * ******************************************************************************
+ * ******************************************************************************
+ * File: Visit.java
+ * Project: IntelliJ IDEA 15.0
+ * Assignment: Chocoholics Anonymous System
+ * University: McMurry University
+ * Course: COSC–4360 Spring 2016
+ * Instructor: Mr. Brozovic
+ * Programmer: Jon Carr
+ * Date: January 13, 2016
+ * Update by: Additional coder’s name
+ * Updated: Date code was updated
+ * Compiler: NetBeans IDE Java SE
+ * Description: Class Definitions for EFTReport class
+ * *******************************************************************************
+ * *******************************************************************************
  *******************************************************************************/
 
 package model;
@@ -22,9 +22,8 @@ package model;
 import java.sql.Time;
 import java.util.Date;
 import java.time.LocalDate;
+
 import javafx.scene.control.DatePicker;
-
-
 
 
 public class Visit {
@@ -39,7 +38,7 @@ public class Visit {
     //Constructors
 
     public Visit(String transDate, String servDate,
-                 int provNum, int memNum, int servCode, String comment){
+                 int provNum, int memNum, int servCode, String comment) {
 
         this.transactionDate = transDate;
         this.serviceDate = servDate;
@@ -49,56 +48,65 @@ public class Visit {
         this.comment = comment;
     }
 
-    public Visit(){
+    public Visit() {
 
     }
 
     //Getters
 
-    public String getTransactionDate(){
+    public String getTransactionDate() {
         return transactionDate;
     }
 
 
-
-    public String getServiceDate(){
+    public String getServiceDate() {
         return serviceDate;
     }
 
-    public int getProviderNumber(){
+    public int getProviderNumber() {
         return providerNumber;
     }
 
-    public int getMemberNumber(){
+    public int getMemberNumber() {
         return memberNumber;
     }
 
-    public int getServiceCode(){
+    public int getServiceCode() {
         return serviceCode;
     }
 
-    public String getComment(){
+    public String getComment() {
         return comment;
     }
 
     //Setters
 
-    public void setProviderNumber(int provNumber){ this.providerNumber = provNumber; }
+    public void setProviderNumber(int provNumber) {
+        this.providerNumber = provNumber;
+    }
 
-    public void setMemberNumber (int mbrNumber){ this.memberNumber = mbrNumber; }
+    public void setMemberNumber(int mbrNumber) {
+        this.memberNumber = mbrNumber;
+    }
 
-    public void setServiceCode (int svcCode ){ this.serviceCode = svcCode; }
+    public void setServiceCode(int svcCode) {
+        this.serviceCode = svcCode;
+    }
 
-    public void setServiceDate( String svcDate ){ this.serviceDate = svcDate; }
+    public void setServiceDate(String svcDate) {
+        this.serviceDate = svcDate;
+    }
 
-    public void setTransactionDate( String transDate){this.transactionDate = transDate; }
+    public void setTransactionDate(String transDate) {
+        this.transactionDate = transDate;
+    }
 
     public DatePicker datePicker;
     public static LocalDate currentDate;
 
-    public void setPickerDate(){
+    public void setPickerDate() {
 
-        datePicker.setOnAction(event-> {
+        datePicker.setOnAction(event -> {
             //String modDate = new Date(datePicker.getValue().toString());
             String modDate = datePicker.getValue().toString();
             this.serviceDate = modDate;
@@ -106,21 +114,10 @@ public class Visit {
         });
 
 
-
-
     }
 
 
-
 }
-
-
-
-
-
-
-
-
 
 
 /*******************************************************************************

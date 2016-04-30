@@ -1,20 +1,20 @@
 /*******************************************************************************
- *******************************************************************************
- *******************************************************************************
- File: ChocAnSysApp.java
- Project: IntelliJ IDEA 15.0
- Assignment: Chocoholics Anonymous System
- University: McMurry University
- Course: COSC–4360 Spring 2016
- Instructor: Mr. Brozovic
- Programmer: Jon Carr
- Date: January 13, 2016
- Update by: Additional coder’s name
- Updated: Date code was updated
- Compiler: NetBeans IDE Java SE
- Description: Class Definitions for Provider class
- ********************************************************************************
- ********************************************************************************
+ * ******************************************************************************
+ * ******************************************************************************
+ * File: ChocAnSysApp.java
+ * Project: IntelliJ IDEA 15.0
+ * Assignment: Chocoholics Anonymous System
+ * University: McMurry University
+ * Course: COSC–4360 Spring 2016
+ * Instructor: Mr. Brozovic
+ * Programmer: Jon Carr
+ * Date: January 13, 2016
+ * Update by: Additional coder’s name
+ * Updated: Date code was updated
+ * Compiler: NetBeans IDE Java SE
+ * Description: Class Definitions for Provider class
+ * *******************************************************************************
+ * *******************************************************************************
  *******************************************************************************/
 
 package controller;
@@ -43,16 +43,15 @@ import java.io.IOException;
 public class ChocAnSysApp extends Application {
 
 
-
     private Stage primaryStage;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         mainWindow();
     }
 
-    public void mainWindow(){
+    public void mainWindow() {
 
         try {
             FXMLLoader loader = new FXMLLoader(ChocAnSysApp.class.getResource("../view/MainWindowView.fxml"));
@@ -72,38 +71,35 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
     }
 
-    public void systemSettingWindow(){
+    public void systemSettingWindow() {
 
-        try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw))
-        {
+        try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
 
 
-        }catch(IOException e){
+        } catch (IOException e) {
             // print errors to error log
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -126,12 +122,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -156,12 +151,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -188,12 +182,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -221,12 +214,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -253,17 +245,15 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
     }
-
 
 
     public void searchUpdateMemberWindow() {
@@ -288,21 +278,20 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
     }
 
-    public void MemberReportLookupWindow(){
-        try{
+    public void MemberReportLookupWindow() {
+        try {
             FXMLLoader loader = new FXMLLoader(ChocAnSysApp.class.getResource("../view/MemberReportLookupView.fxml"));
-            AnchorPane pane =  loader.load();
+            AnchorPane pane = loader.load();
 
             MemberReportLookupViewController controller = loader.getController();
             Stage dialog = new Stage();
@@ -312,19 +301,18 @@ public class ChocAnSysApp extends Application {
             dialog.setScene(new Scene(pane, 400, 300));
             dialog.show();
 
-        }catch(IOException e){
+        } catch (IOException e) {
             // print errors to error log
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
 
@@ -332,8 +320,8 @@ public class ChocAnSysApp extends Application {
 
     }
 
-    public void ProviderReportLookupWindow(){
-        try{
+    public void ProviderReportLookupWindow() {
+        try {
             FXMLLoader loader = new FXMLLoader(ChocAnSysApp.class.getResource("../view/ProviderReportLookupView.fxml"));
             AnchorPane pane = loader.load();
 
@@ -346,29 +334,21 @@ public class ChocAnSysApp extends Application {
             dialog.show();
 
 
-
-
-
-        }catch(IOException e){
+        } catch (IOException e) {
             // print errors to error log
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
-
-
-
-
 
 
     }
@@ -395,12 +375,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -427,12 +406,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -459,12 +437,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -491,12 +468,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -524,12 +500,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -556,12 +531,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -589,12 +563,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -621,12 +594,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -653,12 +625,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -686,12 +657,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -718,12 +688,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -750,12 +719,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -783,12 +751,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -815,12 +782,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -847,12 +813,11 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -879,18 +844,17 @@ public class ChocAnSysApp extends Application {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
     }
 
-    public ComboBox<String> populateState(ComboBox state){
+    public ComboBox<String> populateState(ComboBox state) {
         ComboBox<String> stateBox = new ComboBox<>();
         List<String> stateList = new ArrayList<>();
         stateList.add("AL");
@@ -950,7 +914,7 @@ public class ChocAnSysApp extends Application {
         return stateBox;
     }
 
-    public ComboBox<String> populateStatus(ComboBox status){
+    public ComboBox<String> populateStatus(ComboBox status) {
         ComboBox<String> statusBox = new ComboBox<>();
         List<String> statusList = new ArrayList<>();
         statusList.add("Active");

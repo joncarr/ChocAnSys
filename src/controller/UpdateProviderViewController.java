@@ -1,20 +1,20 @@
 /*******************************************************************************
- *******************************************************************************
- *******************************************************************************
- File: UpdateProviderViewController.java
- Project: IntelliJ IDEA 15.0
- Assignment: Chocoholics Anonymous System
- University: McMurry University
- Course: COSC–4360 Spring 2016
- Instructor: Mr. Brozovic
- Programmer: Jon Carr
- Date: January 13, 2016
- Update by: Additional coder’s name
- Updated: Date code was updated
- Compiler: NetBeans IDE Java SE
- Description: Class Definitions for Provider class
- ********************************************************************************
- ********************************************************************************
+ * ******************************************************************************
+ * ******************************************************************************
+ * File: UpdateProviderViewController.java
+ * Project: IntelliJ IDEA 15.0
+ * Assignment: Chocoholics Anonymous System
+ * University: McMurry University
+ * Course: COSC–4360 Spring 2016
+ * Instructor: Mr. Brozovic
+ * Programmer: Jon Carr
+ * Date: January 13, 2016
+ * Update by: Additional coder’s name
+ * Updated: Date code was updated
+ * Compiler: NetBeans IDE Java SE
+ * Description: Class Definitions for Provider class
+ * *******************************************************************************
+ * *******************************************************************************
  *******************************************************************************/
 
 package controller;
@@ -41,18 +41,26 @@ public class UpdateProviderViewController {
     private ChocAnSysApp main;
     Stage dialog;
     Provider provider;
-    @FXML private TextField textFieldProviderNumber;
-    @FXML private TextField textFieldProviderFirstName;
-    @FXML private TextField textFieldProviderLastName;
-    @FXML private TextField textFieldProviderStreet;
-    @FXML private TextField textFieldProviderCity;
-    @FXML private TextField textFieldProviderZipCode;
-    @FXML private ComboBox<String> comboBoxProviderState;
-    @FXML private ComboBox<String> comboBoxProviderStatus;
+    @FXML
+    private TextField textFieldProviderNumber;
+    @FXML
+    private TextField textFieldProviderFirstName;
+    @FXML
+    private TextField textFieldProviderLastName;
+    @FXML
+    private TextField textFieldProviderStreet;
+    @FXML
+    private TextField textFieldProviderCity;
+    @FXML
+    private TextField textFieldProviderZipCode;
+    @FXML
+    private ComboBox<String> comboBoxProviderState;
+    @FXML
+    private ComboBox<String> comboBoxProviderStatus;
     PreparedStatement stmt;
     Connection db;
 
-    public void setMain(ChocAnSysApp main, Stage dialog, Provider provider){
+    public void setMain(ChocAnSysApp main, Stage dialog, Provider provider) {
         this.main = main;
         this.dialog = dialog;
         this.provider = provider;
@@ -63,10 +71,10 @@ public class UpdateProviderViewController {
 
     }
 
-    public void confirmBtnHandler(){
+    public void confirmBtnHandler() {
 
         try {
-            String sql =    "update providers " +
+            String sql = "update providers " +
                     "set fname = ?," +
                     "lname = ?," +
                     "street = ?," +
@@ -98,12 +106,11 @@ public class UpdateProviderViewController {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -111,7 +118,7 @@ public class UpdateProviderViewController {
     }
 
 
-    public void cancelBtnHandler(){
+    public void cancelBtnHandler() {
         dialog.close();
 
     }
@@ -120,7 +127,7 @@ public class UpdateProviderViewController {
     Function is called when the user wishes to UPDATE a member, rather than just adding a member
     This function takes the member information that was passed to this controller and pre-populates the text fields
     */
-    public void fillProviderDetails(Provider provider){
+    public void fillProviderDetails(Provider provider) {
         textFieldProviderNumber.setText(String.valueOf(provider.getNumber()));
         textFieldProviderFirstName.setText(provider.getFirstName());
         textFieldProviderLastName.setText(provider.getLastName());

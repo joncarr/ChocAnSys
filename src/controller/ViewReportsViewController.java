@@ -1,20 +1,20 @@
 /*******************************************************************************
- *******************************************************************************
- *******************************************************************************
- File: ViewReportsViewController.java
- Project: IntelliJ IDEA 15.0
- Assignment: Chocoholics Anonymous System
- University: McMurry University
- Course: COSC–4360 Spring 2016
- Instructor: Mr. Brozovic
- Programmer: Jon Carr
- Date: January 13, 2016
- Update by: Luis Lopez
- Updated: 15 March 2016
- Compiler: NetBeans IDE Java SE
- Description: Class Definitions for Provider class
- ********************************************************************************
- ********************************************************************************
+ * ******************************************************************************
+ * ******************************************************************************
+ * File: ViewReportsViewController.java
+ * Project: IntelliJ IDEA 15.0
+ * Assignment: Chocoholics Anonymous System
+ * University: McMurry University
+ * Course: COSC–4360 Spring 2016
+ * Instructor: Mr. Brozovic
+ * Programmer: Jon Carr
+ * Date: January 13, 2016
+ * Update by: Luis Lopez
+ * Updated: 15 March 2016
+ * Compiler: NetBeans IDE Java SE
+ * Description: Class Definitions for Provider class
+ * *******************************************************************************
+ * *******************************************************************************
  *******************************************************************************/
 
 
@@ -42,7 +42,8 @@ public class ViewReportsViewController {
     Stage dialog;
     String eol = System.getProperty("line.separator");
     private Connection db;
-    public void setMain(ChocAnSysApp main, Stage dialog){
+
+    public void setMain(ChocAnSysApp main, Stage dialog) {
         this.main = main;
         this.dialog = dialog;
         db = DBConnection.connect();
@@ -63,12 +64,12 @@ public class ViewReportsViewController {
 
 
     @FXML
-    public void membersReportBtnHandler(){
-       main.MemberReportLookupWindow();
+    public void membersReportBtnHandler() {
+        main.MemberReportLookupWindow();
     }
 
     @FXML
-    public void providerReportBtnHandler(){
+    public void providerReportBtnHandler() {
         // Date updated: 14 March 2016
         // By: Luis Lopez
 
@@ -77,14 +78,14 @@ public class ViewReportsViewController {
     }
 
     @FXML
-    public void managersReportBtnHandler(){
+    public void managersReportBtnHandler() {
         // Date Updated 13 March 16
         // By: Luis Lopez
 
         moveVar = 10;
 
 
-        try{
+        try {
             FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "ManagerReport.pdf");
             try {
                 PDF pdf = new PDF(fos);
@@ -92,7 +93,6 @@ public class ViewReportsViewController {
                 f1.setSize(10);
                 Page page = new Page(pdf, A4.PORTRAIT);
                 TextLine text = new TextLine(f1, "");
-
 
 
                 text.setPosition(70, 84);
@@ -103,7 +103,7 @@ public class ViewReportsViewController {
                 text.drawOn(page);
 
                 text.setText("Date: " + SystemSettingViewController.currentDate);
-                text.setPosition(365,156);
+                text.setPosition(365, 156);
                 text.drawOn(page);
 
                 text.setText("Page: 01");
@@ -124,8 +124,8 @@ public class ViewReportsViewController {
                 Statement Rowstmt = db.createStatement();
                 ResultSet RowRS = Rowstmt.executeQuery("SELECT COUNT(*) AS rowcount FROM providers");
                 RowRS.next();
-                int count = RowRS.getInt("rowcount") ;
-                RowRS.close() ;
+                int count = RowRS.getInt("rowcount");
+                RowRS.close();
 
 
                 Provider provider = new Provider();
@@ -146,13 +146,13 @@ public class ViewReportsViewController {
                 int numberProviders = 0;
                 int numberOfClaims = 0;
                 ProviderRS = stmtProvider.executeQuery("SELECT * FROM PROVIDERS");
-                while(ProviderRS.next()){
+                while (ProviderRS.next()) {
                     //stmtProvider = db.createStatement();
                     provider.setNumber(ProviderRS.getInt("id"));
 
                     VisitRS = stmtVisit.executeQuery("select * from visits where provnumber = "
                             + provider.getNumber() + " ;");
-                    while(VisitRS.next()){
+                    while (VisitRS.next()) {
 
                         System.out.println(provider.getNumber());
                         visit.setServiceCode(VisitRS.getInt("svccode"));
@@ -162,18 +162,18 @@ public class ViewReportsViewController {
                         ServiceRS = stmtService.executeQuery("select * from services where svccode ="
                                 + visit.getServiceCode() + " ;");
                         service.setFee(ServiceRS.getInt("fee"));
-                        totalFees+=service.getFee();
+                        totalFees += service.getFee();
 
 
                         flag = 1;
                         hitCount++;
 
                     }
-                    if ( flag == 1){
-                        numberOfClaims+=hitCount;
-                        sumOfClaims+=totalFees;
+                    if (flag == 1) {
+                        numberOfClaims += hitCount;
+                        sumOfClaims += totalFees;
                         text.setText("" + provider.getNumber());
-                        text.setPosition(70, movedown+=20);
+                        text.setPosition(70, movedown += 20);
                         text.drawOn(page);
 
 
@@ -189,18 +189,14 @@ public class ViewReportsViewController {
                         text.setPosition(400, movedown);
                         text.drawOn(page);
                         numberProviders++;
-                        sumOfClaims+=sumOfClaims;
+                        sumOfClaims += sumOfClaims;
                         flag = 0;
                         hitCount = 0;
                         totalFees = 0;
                     }
 
 
-
                 }
-
-
-
 
 
                 text.setText("" + numberProviders);
@@ -229,50 +225,43 @@ public class ViewReportsViewController {
                 text.drawOn(page);
 
 
-
-
-
-
-
                 // open pdf
                 try {
                     Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "ManagerReport.pdf"));
 
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 pdf.flush();
                 pdf.close();
-            }catch(Exception e) {
+            } catch (Exception e) {
                 // print errors to error log
 
                 StringWriter sw = new StringWriter();
                 e.printStackTrace(new PrintWriter(sw));
                 String exceptionAsString = sw.toString();
 
-                try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                    BufferedWriter bw = new BufferedWriter(fw);
-                    PrintWriter out = new PrintWriter(bw))
-                {
+                try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                     BufferedWriter bw = new BufferedWriter(fw);
+                     PrintWriter out = new PrintWriter(bw)) {
                     out.println(exceptionAsString);
-                }catch(IOException er){
+                } catch (IOException er) {
                     er.printStackTrace();
                 }
             }
 
-        }catch(IOException e){
+        } catch (IOException e) {
             // print errors to error log
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -282,12 +271,10 @@ public class ViewReportsViewController {
     }
 
     @FXML
-    public void eftDataBtnHandler(){
+    public void eftDataBtnHandler() {
 
 
-
-
-        try{
+        try {
             FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "EFTDataReport.pdf");
             PDF pdf = new PDF(fos);
             Font f1 = new Font(pdf, CoreFont.COURIER);
@@ -315,9 +302,6 @@ public class ViewReportsViewController {
             int j;
 
 
-
-
-
             Provider provider = new Provider();
             stmtProvider = db.createStatement();
 
@@ -331,13 +315,13 @@ public class ViewReportsViewController {
             int flag = 0;
 
             ProviderRS = stmtProvider.executeQuery("SELECT * FROM PROVIDERS");
-            while(ProviderRS.next()){
+            while (ProviderRS.next()) {
                 //stmtProvider = db.createStatement();
                 provider.setNumber(ProviderRS.getInt("id"));
 
                 VisitRS = stmtVisit.executeQuery("select * from visits where provnumber = "
                         + provider.getNumber() + " ;");
-                while(VisitRS.next()){
+                while (VisitRS.next()) {
 
                     System.out.println(provider.getNumber());
                     visit.setServiceCode(VisitRS.getInt("svccode"));
@@ -351,10 +335,10 @@ public class ViewReportsViewController {
 
                     flag = 1;
                 }
-                if ( flag == 1){
+                if (flag == 1) {
 
                     text.setText("" + provider.getNumber());
-                    text.setPosition(70, movedown+=20);
+                    text.setPosition(70, movedown += 20);
                     text.drawOn(page);
 
                     text.setText("$" + service.getFee());
@@ -366,85 +350,46 @@ public class ViewReportsViewController {
                     text.drawOn(page);
 
 
-
-
-
-
                     flag = 0;
 
                 }
 
 
-
             }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            try{
-                Desktop.getDesktop().open( new File(SystemSettingViewController.workingDirectory + "\\" + "EFTDataReport.pdf"));
-            }catch(IOException e){
+            try {
+                Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "EFTDataReport.pdf"));
+            } catch (IOException e) {
                 // print errors to error log
 
                 StringWriter sw = new StringWriter();
                 e.printStackTrace(new PrintWriter(sw));
                 String exceptionAsString = sw.toString();
 
-                try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                    BufferedWriter bw = new BufferedWriter(fw);
-                    PrintWriter out = new PrintWriter(bw))
-                {
+                try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                     BufferedWriter bw = new BufferedWriter(fw);
+                     PrintWriter out = new PrintWriter(bw)) {
                     out.println(exceptionAsString);
-                }catch(IOException er){
+                } catch (IOException er) {
                     er.printStackTrace();
                 }
             }
             pdf.flush();
             pdf.close();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             // print errors to error log
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -452,54 +397,49 @@ public class ViewReportsViewController {
     }
 
     @FXML
-    public void acmeUpdateBtnHandler(){
+    public void acmeUpdateBtnHandler() {
         // Date updated 13 March 16
         // by: Luis Lopez
 
 
-
-        try(FileWriter fw = new FileWriter("AcmeUpdate.txt", true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw))
-        {
+        try (FileWriter fw = new FileWriter("AcmeUpdate.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
 
 
-        }catch(IOException e){
+        } catch (IOException e) {
             // print errors to error log
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
 
-        try{
-            Desktop.getDesktop().open( new File(SystemSettingViewController.workingDirectory + "\\" + "AcmeUpdate.txt"));
-        }catch(IOException e){
+        try {
+            Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "AcmeUpdate.txt"));
+        } catch (IOException e) {
             // print errors to error log
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
-
 
 
     }
@@ -519,12 +459,11 @@ public class ViewReportsViewController {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
@@ -533,7 +472,7 @@ public class ViewReportsViewController {
     }
 
     @FXML
-    public void backToMainMenuBtnHandler(){
+    public void backToMainMenuBtnHandler() {
         dialog.close();
     }
 }

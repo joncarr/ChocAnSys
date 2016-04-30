@@ -24,8 +24,10 @@ public class MemberReportLookupViewController {
     private ChocAnSysApp main;
     private Stage dialog;
     private Connection db;
-    @FXML private TextField textFieldMemberID;
-    @FXML private TextField errorlabel;
+    @FXML
+    private TextField textFieldMemberID;
+    @FXML
+    private TextField errorlabel;
 
     private Statement stmt;
     private Statement stmtVisit;
@@ -36,23 +38,22 @@ public class MemberReportLookupViewController {
     private ResultSet ProviderRS;
     private ResultSet ServiceRS;
 
-    public void setMain(ChocAnSysApp main, Stage dialog){
+    public void setMain(ChocAnSysApp main, Stage dialog) {
         this.main = main;
         this.dialog = dialog;
         db = DBConnection.connect();
 
     }
 
-    public void btnLookupHandler(){
+    public void btnLookupHandler() {
 
 
-
-        try{
+        try {
             Member member = new Member();
             stmt = db.createStatement();
             rs = stmt.executeQuery("select * from members where id = " + textFieldMemberID.getText() + " ;");
 
-            if ( rs.next() ){
+            if (rs.next()) {
                 member.setNumber(rs.getInt("id"));
                 member.setFirstName(rs.getString("fname"));
                 member.setLastName(rs.getString("lname"));
@@ -83,7 +84,7 @@ public class MemberReportLookupViewController {
                         text.setPosition(232, 126);
                         text.drawOn(page);
 
-                        text.setText( member.getFirstName() + " " + member.getLastName());
+                        text.setText(member.getFirstName() + " " + member.getLastName());
                         text.setPosition(70, 162);
                         text.drawOn(page);
 
@@ -91,29 +92,29 @@ public class MemberReportLookupViewController {
                         text.setPosition(365, 162);
                         text.drawOn(page);
 
-                        text.setText( member.getStreet());
-                        text.setPosition(70,174);
+                        text.setText(member.getStreet());
+                        text.setPosition(70, 174);
                         text.drawOn(page);
 
                         text.setText(member.getCity() + ", " + member.getState() + ", " + member.getZipCode());
-                        text.setPosition(70,186);
+                        text.setPosition(70, 186);
                         text.drawOn(page);
 
 
                         text.setText("Statement Date: " + SystemSettingViewController.currentDate);
-                        text.setPosition(365,186);
+                        text.setPosition(365, 186);
                         text.drawOn(page);
 
                         text.setText("Page: 01");
-                        text.setPosition(365,210);
+                        text.setPosition(365, 210);
                         text.drawOn(page);
 
                         text.setText("Date         Service                    Provider");
-                        text.setPosition(70,234);
+                        text.setPosition(70, 234);
                         text.drawOn(page);
 
                         text.setText("------------------------------------------------------------------------------");
-                        text.setPosition(70,250);
+                        text.setPosition(70, 250);
                         text.drawOn(page);
 
 
@@ -125,7 +126,7 @@ public class MemberReportLookupViewController {
 
                         int apptright = 70;
                         int apptdown = 275;
-                        while(rs2.next()){
+                        while (rs2.next()) {
 
                             amount++;
 
@@ -149,19 +150,17 @@ public class MemberReportLookupViewController {
                             provider.setLastName(ProviderRS.getString("lname"));
 
                             text.setText(provider.getFirstName() + " " + provider.getLastName());
-                            text.setPosition(apptright+80, apptdown);
+                            text.setPosition(apptright + 80, apptdown);
                             text.drawOn(page);
 
                             text.setText(service.getName());
-                            text.setPosition(apptright+245, apptdown);
+                            text.setPosition(apptright + 245, apptdown);
                             text.drawOn(page);
 
-                            apptdown+=20;
-
+                            apptdown += 20;
 
 
                         }
-
 
 
                         pdf.flush();
@@ -169,56 +168,52 @@ public class MemberReportLookupViewController {
 
                         try {
                             Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + PDFname));
-                        }catch(Exception e){
+                        } catch (Exception e) {
                             // print errors to error log
 
                             StringWriter sw = new StringWriter();
                             e.printStackTrace(new PrintWriter(sw));
                             String exceptionAsString = sw.toString();
 
-                            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                                BufferedWriter bw = new BufferedWriter(fw);
-                                PrintWriter out = new PrintWriter(bw))
-                            {
+                            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                                 BufferedWriter bw = new BufferedWriter(fw);
+                                 PrintWriter out = new PrintWriter(bw)) {
                                 out.println(exceptionAsString);
-                            }catch(IOException er){
+                            } catch (IOException er) {
                                 er.printStackTrace();
                             }
                         }
-                    }catch(Exception e) {
+                    } catch (Exception e) {
                         // print errors to error log
 
                         StringWriter sw = new StringWriter();
                         e.printStackTrace(new PrintWriter(sw));
                         String exceptionAsString = sw.toString();
 
-                        try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                            BufferedWriter bw = new BufferedWriter(fw);
-                            PrintWriter out = new PrintWriter(bw))
-                        {
+                        try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                             BufferedWriter bw = new BufferedWriter(fw);
+                             PrintWriter out = new PrintWriter(bw)) {
                             out.println(exceptionAsString);
-                        }catch(IOException er){
+                        } catch (IOException er) {
                             er.printStackTrace();
                         }
                     }
 
-                }catch(IOException e) {
+                } catch (IOException e) {
                     // print errors to error log
 
                     StringWriter sw = new StringWriter();
                     e.printStackTrace(new PrintWriter(sw));
                     String exceptionAsString = sw.toString();
 
-                    try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                        BufferedWriter bw = new BufferedWriter(fw);
-                        PrintWriter out = new PrintWriter(bw))
-                    {
+                    try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                         BufferedWriter bw = new BufferedWriter(fw);
+                         PrintWriter out = new PrintWriter(bw)) {
                         out.println(exceptionAsString);
-                    }catch(IOException er){
+                    } catch (IOException er) {
                         er.printStackTrace();
                     }
                 }
-
 
 
             }
@@ -227,7 +222,7 @@ public class MemberReportLookupViewController {
             dialog.close();
 
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
             // print errors to error log
 
@@ -235,23 +230,21 @@ public class MemberReportLookupViewController {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
 
 
-
-
     }
 
-    public void btnCancelHandler(){ dialog.close(); }
-
+    public void btnCancelHandler() {
+        dialog.close();
+    }
 
 
 }

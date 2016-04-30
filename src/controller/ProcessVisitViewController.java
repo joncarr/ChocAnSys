@@ -1,20 +1,20 @@
 /*******************************************************************************
- *******************************************************************************
- *******************************************************************************
- File: ProcessVisitViewController.java
- Project: IntelliJ IDEA 15.0
- Assignment: Chocoholics Anonymous System
- University: McMurry University
- Course: COSC–4360 Spring 2016
- Instructor: Mr. Brozovic
- Programmer: Jon Carr
- Date: January 13, 2016
- Update by: Additional coder’s name
- Updated: Date code was updated
- Compiler: NetBeans IDE Java SE
- Description: Class Definitions for Provider class
- ********************************************************************************
- ********************************************************************************
+ * ******************************************************************************
+ * ******************************************************************************
+ * File: ProcessVisitViewController.java
+ * Project: IntelliJ IDEA 15.0
+ * Assignment: Chocoholics Anonymous System
+ * University: McMurry University
+ * Course: COSC–4360 Spring 2016
+ * Instructor: Mr. Brozovic
+ * Programmer: Jon Carr
+ * Date: January 13, 2016
+ * Update by: Additional coder’s name
+ * Updated: Date code was updated
+ * Compiler: NetBeans IDE Java SE
+ * Description: Class Definitions for Provider class
+ * *******************************************************************************
+ * *******************************************************************************
  *******************************************************************************/
 
 package controller;
@@ -30,10 +30,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+
 import javafx.scene.paint.Color;
 import model.DBConnection;
 import model.Member;
 import model.Visit;
+
 import java.time.LocalDate;
 
 
@@ -42,25 +44,35 @@ public class ProcessVisitViewController {
     ChocAnSysApp main;
     Stage dialog;
     private Connection db;
-    @FXML private TextField textFieldMemberNumber;
+    @FXML
+    private TextField textFieldMemberNumber;
     private Statement stmt;
     private PreparedStatement pstmt;
     private ResultSet rs;
     private SimpleDateFormat tf = new SimpleDateFormat("yyyy-MM-dd");
 
 
-    @FXML private DatePicker datePickerServiceDate;
-    @FXML private Label lblServiceFee;
-    @FXML private Label lblServiceName;
-    @FXML private Label lblCurrentMemberStatus;
-    @FXML private TextField textFieldProviderSeenID;
-    @FXML private TextField textFieldServiceCodeID;
-    @FXML private GridPane gridPaneEnterVisit;
-    @FXML private GridPane gridPaneCommentSection;
-    @FXML private TextArea textAreaComment;
+    @FXML
+    private DatePicker datePickerServiceDate;
+    @FXML
+    private Label lblServiceFee;
+    @FXML
+    private Label lblServiceName;
+    @FXML
+    private Label lblCurrentMemberStatus;
+    @FXML
+    private TextField textFieldProviderSeenID;
+    @FXML
+    private TextField textFieldServiceCodeID;
+    @FXML
+    private GridPane gridPaneEnterVisit;
+    @FXML
+    private GridPane gridPaneCommentSection;
+    @FXML
+    private TextArea textAreaComment;
     public static LocalDate serviceDate;
 
-    public void setMain(ChocAnSysApp main, Stage dialog){
+    public void setMain(ChocAnSysApp main, Stage dialog) {
         this.main = main;                                   //makes a connection main class
         this.dialog = dialog;                               // makes connection to dialog box displayed
         gridPaneEnterVisit.setDisable(true);                //disables user input for input pane
@@ -75,22 +87,22 @@ public class ProcessVisitViewController {
     }
 
 
-    public void validateMemberBtnHandler(){
+    public void validateMemberBtnHandler() {
         Member member = new Member();
-        try{
+        try {
             stmt = db.createStatement();
             rs = stmt.executeQuery("select * from members where id = " + textFieldMemberNumber.getText() + " ;");
             member.setStatus(rs.getString("status"));
             lblCurrentMemberStatus.setTextFill(Color.web("#000000"));
             lblCurrentMemberStatus.setText(member.getStatus());
-            if (lblCurrentMemberStatus.getText().equals("Active")){
+            if (lblCurrentMemberStatus.getText().equals("Active")) {
                 gridPaneEnterVisit.setDisable(false);
                 gridPaneCommentSection.setDisable(false);
             }
 
             //textFieldMemberNumber.clear();
 
-        }catch( Exception e){
+        } catch (Exception e) {
             lblCurrentMemberStatus.setTextFill(Color.web("#FF0000"));
             lblCurrentMemberStatus.setText("Number Not Found");
             // print errors to error log
@@ -99,22 +111,19 @@ public class ProcessVisitViewController {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
     }
 
 
-
     @FXML
-    public void submitClaimBtnHandler(){
-
+    public void submitClaimBtnHandler() {
 
 
         String servDate = datePickerServiceDate.getValue().toString();
@@ -153,24 +162,23 @@ public class ProcessVisitViewController {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
     }
 
     @FXML
-    public void cancelBtnHandler(){
+    public void cancelBtnHandler() {
         dialog.close();
     }
 
     @FXML
-    public void onEnter(){
+    public void onEnter() {
         try {
             rs = stmt.executeQuery("select * from services where svccode = " + textFieldServiceCodeID.getText() + " ;");
             lblServiceName.setText(rs.getString("svcdescription"));
@@ -182,12 +190,11 @@ public class ProcessVisitViewController {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }

@@ -1,20 +1,20 @@
 /*******************************************************************************
- *******************************************************************************
- *******************************************************************************
- File: UpdateMemberViewController.java
- Project: IntelliJ IDEA 15.0
- Assignment: Chocoholics Anonymous System
- University: McMurry University
- Course: COSC–4360 Spring 2016
- Instructor: Mr. Brozovic
- Programmer: Jon Carr
- Date: January 13, 2016
- Update by: Additional coder’s name
- Updated: Date code was updated
- Compiler: NetBeans IDE Java SE
- Description: Class Definitions for Provider class
- ********************************************************************************
- ********************************************************************************
+ * ******************************************************************************
+ * ******************************************************************************
+ * File: UpdateMemberViewController.java
+ * Project: IntelliJ IDEA 15.0
+ * Assignment: Chocoholics Anonymous System
+ * University: McMurry University
+ * Course: COSC–4360 Spring 2016
+ * Instructor: Mr. Brozovic
+ * Programmer: Jon Carr
+ * Date: January 13, 2016
+ * Update by: Additional coder’s name
+ * Updated: Date code was updated
+ * Compiler: NetBeans IDE Java SE
+ * Description: Class Definitions for Provider class
+ * *******************************************************************************
+ * *******************************************************************************
  *******************************************************************************/
 
 package controller;
@@ -40,21 +40,31 @@ public class UpdateMemberViewController {
     private ChocAnSysApp main;
     Stage dialog;
     Member member;
-    @FXML private TextField getTextFieldMemberNumber;
-    @FXML private TextField textFieldMemberNumber;
-    @FXML private TextField textFieldMemberFirstName;
-    @FXML private TextField textFieldMemberLastName;
-    @FXML private TextField textFieldMemberStreet;
-    @FXML private TextField textFieldMemberCity;
-    @FXML private TextField textFieldMemberZipCode;
-    @FXML private ComboBox<String> comboBoxMemberState;
-    @FXML private ComboBox<String> comboBoxMemberStatus;
-    @FXML private Label lblMemberStatus;
+    @FXML
+    private TextField getTextFieldMemberNumber;
+    @FXML
+    private TextField textFieldMemberNumber;
+    @FXML
+    private TextField textFieldMemberFirstName;
+    @FXML
+    private TextField textFieldMemberLastName;
+    @FXML
+    private TextField textFieldMemberStreet;
+    @FXML
+    private TextField textFieldMemberCity;
+    @FXML
+    private TextField textFieldMemberZipCode;
+    @FXML
+    private ComboBox<String> comboBoxMemberState;
+    @FXML
+    private ComboBox<String> comboBoxMemberStatus;
+    @FXML
+    private Label lblMemberStatus;
     private PreparedStatement stmt;
     private Connection db;
 
 
-    public void setMain(ChocAnSysApp main, Stage dialog, Member member){
+    public void setMain(ChocAnSysApp main, Stage dialog, Member member) {
         this.main = main;
         this.dialog = dialog;
         this.member = member;
@@ -66,19 +76,18 @@ public class UpdateMemberViewController {
     }
 
 
-
-    public void confirmBtnHandler(){
+    public void confirmBtnHandler() {
 
         try {
-            String sql =    "update members " +
-                            "set fname = ?," +
-                            "lname = ?," +
-                            "street = ?," +
-                            "city = ?," +
-                            "state = ?," +
-                            "zip = ?," +
-                            "status = ?" +
-                            "where id = " + textFieldMemberNumber.getText();
+            String sql = "update members " +
+                    "set fname = ?," +
+                    "lname = ?," +
+                    "street = ?," +
+                    "city = ?," +
+                    "state = ?," +
+                    "zip = ?," +
+                    "status = ?" +
+                    "where id = " + textFieldMemberNumber.getText();
 
             stmt = db.prepareStatement(sql);
             stmt.setString(1, textFieldMemberFirstName.getText());
@@ -94,13 +103,12 @@ public class UpdateMemberViewController {
             // write to pdf changes
 
             // write to acme update by Luis
-            try(FileWriter fw = new FileWriter("AcmeUpdate.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("AcmeUpdate.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(member.getNumber() + ", " + member.getStatus() + ", "
-                        + member.getFirstName() + ", " + member.getLastName() );
-            }catch(IOException e){
+                        + member.getFirstName() + ", " + member.getLastName());
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
@@ -112,32 +120,25 @@ public class UpdateMemberViewController {
             dialog.close();
         } catch (SQLException e) {
 
-           // print errors to error log
+            // print errors to error log
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
 
 
-
-
         }
-
-
-       // );
-
     }
 
-    public void cancelBtnHandler(){
+    public void cancelBtnHandler() {
         dialog.close();
 
     }
@@ -146,7 +147,7 @@ public class UpdateMemberViewController {
     Function is called when the user wishes to UPDATE a member, rather than just adding a member
     This function takes the member information that was passed to this controller and pre-populates the text fields
     */
-    public void fillMemberDetails(Member member){
+    public void fillMemberDetails(Member member) {
         textFieldMemberNumber.setText(String.valueOf(member.getNumber()));
         textFieldMemberFirstName.setText(member.getFirstName());
         textFieldMemberLastName.setText(member.getLastName());

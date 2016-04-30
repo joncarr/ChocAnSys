@@ -1,20 +1,30 @@
 /*******************************************************************************
- *******************************************************************************
- *******************************************************************************
- File: AddServiceViewController.java
- Project: IntelliJ IDEA 15.0
- Assignment: Chocoholics Anonymous System
- University: McMurry University
- Course: COSC–4360 Spring 2016
- Instructor: Mr. Brozovic
- Programmer: Jon Carr
- Date: January 13, 2016
- Update by: Additional coder’s name
- Updated: Date code was updated
- Compiler: NetBeans IDE Java SE
- Description: Class Definitions for Provider class
- ********************************************************************************
- ********************************************************************************
+ * ******************************************************************************
+ * ******************************************************************************
+ * File: AddServiceViewController.java
+ * Project: IntelliJ IDEA 15.0
+ * Assignment: Chocoholics Anonymous System
+ * University: McMurry University
+ * Course: COSC–4360 Spring 2016
+ * Instructor: Mr. Brozovic
+ * Programmer: Jon Carr
+ * Date: January 13, 2016
+ * Update by: Additional coder’s name
+ * Updated: Date code was updated
+ * Compiler: NetBeans IDE Java SE
+ * Description: Class Definitions for Provider class
+ * *******************************************************************************
+ * *******************************************************************************
+ * <p>
+ * ******************************************************************************
+ * ******************************************************************************
+ * SQLlite Database services column names:
+ * 1: svccode
+ * 2: svcdescription
+ * 3: fee
+ * 4: status
+ * *******************************************************************************
+ * *******************************************************************************
  *******************************************************************************/
 
 /*******************************************************************************
@@ -53,13 +63,16 @@ public class AddServiceViewController {
     private ChocAnSysApp main;
     Stage dialog;
 
-    @FXML private TextField textFieldServiceCode;
-    @FXML private TextField textFieldServiceName;
-    @FXML private TextField textFieldServiceFee;
-    @FXML private ComboBox<String> comboBoxServiceStatus;
+    @FXML
+    private TextField textFieldServiceCode;
+    @FXML
+    private TextField textFieldServiceName;
+    @FXML
+    private TextField textFieldServiceFee;
+    @FXML
+    private ComboBox<String> comboBoxServiceStatus;
     PreparedStatement stmt;
     Connection db;
-
 
 
     public void setMain(ChocAnSysApp main, Stage dialog) {
@@ -76,7 +89,7 @@ public class AddServiceViewController {
                 Float.parseFloat(textFieldServiceFee.getText()),
                 comboBoxServiceStatus.getValue()
         );
-        try{
+        try {
             stmt = db.prepareStatement("insert into services VALUES (?,?,?,?);");
             stmt.setInt(1, newService.getCode());
             stmt.setString(2, newService.getName());
@@ -90,22 +103,21 @@ public class AddServiceViewController {
             alert.showAndWait();
             db.close();
             dialog.close();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             // print errors to error log
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
-            };
+            }
+
         }
 
 

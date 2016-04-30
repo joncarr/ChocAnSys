@@ -1,20 +1,30 @@
 /*******************************************************************************
- *******************************************************************************
- *******************************************************************************
- File: UpdateServiceViewController.java
- Project: IntelliJ IDEA 15.0
- Assignment: Chocoholics Anonymous System
- University: McMurry University
- Course: COSC–4360 Spring 2016
- Instructor: Mr. Brozovic
- Programmer: Jon Carr
- Date: January 13, 2016
- Update by: Additional coder’s name
- Updated: Date code was updated
- Compiler: NetBeans IDE Java SE
- Description: Class Definitions for Provider class
- ********************************************************************************
- ********************************************************************************
+ * ******************************************************************************
+ * ******************************************************************************
+ * File: UpdateServiceViewController.java
+ * Project: IntelliJ IDEA 15.0
+ * Assignment: Chocoholics Anonymous System
+ * University: McMurry University
+ * Course: COSC–4360 Spring 2016
+ * Instructor: Mr. Brozovic
+ * Programmer: Jon Carr
+ * Date: January 13, 2016
+ * Update by: Additional coder’s name
+ * Updated: Date code was updated
+ * Compiler: NetBeans IDE Java SE
+ * Description: Class Definitions for Provider class
+ * *******************************************************************************
+ * *******************************************************************************
+ * <p>
+ * ******************************************************************************
+ * ******************************************************************************
+ * SQLlite Database services column names:
+ * 1: svccode
+ * 2: svcdescription
+ * 3: fee
+ * 4: status
+ * *******************************************************************************
+ * *******************************************************************************
  *******************************************************************************/
 
 /*******************************************************************************
@@ -52,14 +62,18 @@ public class UpdateServiceViewController {
     private ChocAnSysApp main;
     Stage dialog;
     Service service;
-    @FXML private TextField textFieldServiceCode;
-    @FXML private TextField textFieldServiceName;
-    @FXML private TextField textFieldServiceFee;
-    @FXML private ComboBox<String> comboBoxServiceStatus;
+    @FXML
+    private TextField textFieldServiceCode;
+    @FXML
+    private TextField textFieldServiceName;
+    @FXML
+    private TextField textFieldServiceFee;
+    @FXML
+    private ComboBox<String> comboBoxServiceStatus;
     private PreparedStatement stmt;
     private Connection db;
 
-    public void setMain(ChocAnSysApp main, Stage dialog, Service service){
+    public void setMain(ChocAnSysApp main, Stage dialog, Service service) {
         this.main = main;
         this.dialog = dialog;
         this.service = service;
@@ -69,10 +83,10 @@ public class UpdateServiceViewController {
 
     }
 
-    public void confirmBtnHandler(){
+    public void confirmBtnHandler() {
 
         try {
-            String sql =    "update services " +
+            String sql = "update services " +
                     "set svccode = ?," +
                     "svcdescription = ?," +
                     "fee = ?," +
@@ -98,18 +112,17 @@ public class UpdateServiceViewController {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
 
-            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
+            try (FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                 BufferedWriter bw = new BufferedWriter(fw);
+                 PrintWriter out = new PrintWriter(bw)) {
                 out.println(exceptionAsString);
-            }catch(IOException er){
+            } catch (IOException er) {
                 er.printStackTrace();
             }
         }
     }
 
-    public void cancelBtnHandler(){
+    public void cancelBtnHandler() {
         dialog.close();
 
     }
@@ -118,7 +131,7 @@ public class UpdateServiceViewController {
     Function is called when the user wishes to UPDATE a member, rather than just adding a member
     This function takes the member information that was passed to this controller and pre-populates the text fields
     */
-    public void fillServiceDetails(Service service){
+    public void fillServiceDetails(Service service) {
         textFieldServiceCode.setText(String.valueOf(service.getCode()));
         textFieldServiceName.setText(service.getName());
         textFieldServiceFee.setText(Float.toString(service.getFee()));

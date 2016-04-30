@@ -1,20 +1,20 @@
 /*******************************************************************************
- *******************************************************************************
- *******************************************************************************
- File: Member.java
- Project: IntelliJ IDEA 15.0
- Assignment: Chocoholics Anonymous System
- University: McMurry University
- Course: COSC–4360 Spring 2016
- Instructor: Mr. Brozovic
- Programmer: Jon Carr
- Date: January 13, 2016
- Update by: Additional coder’s name
- Updated: Date code was updated
- Compiler: NetBeans IDE Java SE
- Description: Class Definitions for EFTReport class
- ********************************************************************************
- ********************************************************************************
+ * ******************************************************************************
+ * ******************************************************************************
+ * File: Member.java
+ * Project: IntelliJ IDEA 15.0
+ * Assignment: Chocoholics Anonymous System
+ * University: McMurry University
+ * Course: COSC–4360 Spring 2016
+ * Instructor: Mr. Brozovic
+ * Programmer: Jon Carr
+ * Date: January 13, 2016
+ * Update by: Additional coder’s name
+ * Updated: Date code was updated
+ * Compiler: NetBeans IDE Java SE
+ * Description: Class Definitions for EFTReport class
+ * *******************************************************************************
+ * *******************************************************************************
  *******************************************************************************/
 package model;
 
@@ -30,12 +30,12 @@ public class Member {
     private String status;  //Changed from char to String 7 March 2016
     private MemberServiceItem[] serviceList;
 
-    
+
     //Constructor
-    
+
     public Member(int mbrNum, String firstName, String lastName,
                   String street, String city, String state, String zipCode,
-                  String mbrStatus){
+                  String mbrStatus) {
         this.number = mbrNum;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -46,7 +46,7 @@ public class Member {
         this.status = mbrStatus;
     }
 
-    public Member(){
+    public Member() {
 
     }
 
@@ -87,7 +87,7 @@ public class Member {
     public MemberServiceItem[] getServiceList() {
         return serviceList;
     }
-    
+
     //Setters
 
 
@@ -126,21 +126,21 @@ public class Member {
     public void setServiceList(MemberServiceItem[] serviceList) {
         this.serviceList = serviceList;
     }
-    
+
     //Methods
-    
-    
-    public MemberServiceItem getNextServiceItem(){
+
+
+    public MemberServiceItem getNextServiceItem() {
         //TODO: Define method
-        
+
         //Temporary Null return statement
         return null;
     }
-    
-    
-    public void addServiceItem(MemberServiceItem mbrServiceItem){
+
+
+    public void addServiceItem(MemberServiceItem mbrServiceItem) {
         //TODO: Define method
     }
-   
+
 
 }

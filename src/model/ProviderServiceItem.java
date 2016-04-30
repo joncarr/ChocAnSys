@@ -1,20 +1,20 @@
 /*******************************************************************************
- *******************************************************************************
- *******************************************************************************
- File: ProviderServiceItem.java
- Project: IntelliJ IDEA 15.0
- Assignment: Chocoholics Anonymous System
- University: McMurry University
- Course: COSC–4360 Spring 2016
- Instructor: Mr. Brozovic
- Programmer: Jon Carr
- Date: January 13, 2016
- Update by: Additional coder’s name
- Updated: Date code was updated
- Compiler: NetBeans IDE Java SE
- Description: Class Definitions for EFTReport class
- ********************************************************************************
- ********************************************************************************
+ * ******************************************************************************
+ * ******************************************************************************
+ * File: ProviderServiceItem.java
+ * Project: IntelliJ IDEA 15.0
+ * Assignment: Chocoholics Anonymous System
+ * University: McMurry University
+ * Course: COSC–4360 Spring 2016
+ * Instructor: Mr. Brozovic
+ * Programmer: Jon Carr
+ * Date: January 13, 2016
+ * Update by: Additional coder’s name
+ * Updated: Date code was updated
+ * Compiler: NetBeans IDE Java SE
+ * Description: Class Definitions for EFTReport class
+ * *******************************************************************************
+ * *******************************************************************************
  *******************************************************************************/
 
 package model;
@@ -23,7 +23,7 @@ import java.sql.Time;
 import java.util.Date;
 
 public class ProviderServiceItem {
-    
+
     private Date transactionDate;
     private Time transactionTime;
     private Date serviceDate;
@@ -31,12 +31,12 @@ public class ProviderServiceItem {
     private String memberName;
     private int serviceCode;
     private float fee;
-    
+
     //Constructor
-    
+
     public ProviderServiceItem(Date transDate, Time transTime, Date servDate,
-            int mbrNumber, String mbrName, int servCode, float fee){
-        
+                               int mbrNumber, String mbrName, int servCode, float fee) {
+
         this.transactionDate = transDate;
         this.transactionTime = transTime;
         this.serviceDate = servDate;
@@ -44,36 +44,36 @@ public class ProviderServiceItem {
         this.memberName = mbrName;
         this.serviceCode = servCode;
         this.fee = fee;
-        
+
     }
-    
+
     //Getters
-    
-    public Date getTransactionDate(){
+
+    public Date getTransactionDate() {
         return transactionDate;
     }
-    
-    public Time getTransactionTime(){
+
+    public Time getTransactionTime() {
         return transactionTime;
     }
-    
-    public Date getServiceDate(){
+
+    public Date getServiceDate() {
         return serviceDate;
     }
-    
-    public int getMemberNumber(){
+
+    public int getMemberNumber() {
         return memberNumber;
     }
-    
-    public String getMemberName(){
+
+    public String getMemberName() {
         return memberName;
     }
-    
-    public int getServiceCode(){
+
+    public int getServiceCode() {
         return serviceCode;
     }
-    
-    public float getFee(){
+
+    public float getFee() {
         return fee;
     }
 }
