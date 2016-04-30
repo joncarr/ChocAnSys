@@ -42,6 +42,7 @@ import javafx.stage.Stage;
 import model.DBConnection;
 import model.Member;
 
+import java.io.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -79,8 +80,6 @@ public class SearchDeleteMemberViewController {
             member.setState(rs.getString("state"));
             member.setZipCode(rs.getString("zip"));
             member.setStatus(rs.getString("status"));
-
-
             main.deleteMembersWindow(member);
             db.close();
             dialog.close();
@@ -89,7 +88,20 @@ public class SearchDeleteMemberViewController {
 
 
         } catch(Exception e){
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
 
 

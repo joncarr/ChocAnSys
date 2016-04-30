@@ -23,6 +23,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
+import java.io.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -67,8 +69,7 @@ public class ProcessVisitViewController {
         datePickerServiceDate.setValue(LocalDate.now());    //sets date picker to current date
         datePickerServiceDate.setOnAction(event -> {        //
             serviceDate = datePickerServiceDate.getValue(); //service date listener for changing date
-            //tf.format(serviceDate);
-            //System.out.println(serviceDate);              //
+
         });
 
     }
@@ -91,9 +92,21 @@ public class ProcessVisitViewController {
 
         }catch( Exception e){
             lblCurrentMemberStatus.setTextFill(Color.web("#FF0000"));
-
             lblCurrentMemberStatus.setText("Number Not Found");
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
     }
 
@@ -134,20 +147,21 @@ public class ProcessVisitViewController {
             db.close();
             dialog.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
-
-
-//            if ( lblCurrentMemberStatus.getText().equals("Number Not Found") ) {
-//                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//                alert.setHeaderText("Process Visit");
-//                alert.setContentText("Enter in valid, active member!");
-//                alert.showAndWait();
-//            }
-
-
-
-
     }
 
     @FXML
@@ -162,7 +176,20 @@ public class ProcessVisitViewController {
             lblServiceName.setText(rs.getString("svcdescription"));
             lblServiceFee.setText("$" + rs.getString("fee") + "0");
         } catch (SQLException e) {
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
     }
 

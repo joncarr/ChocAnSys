@@ -41,14 +41,13 @@ import model.DBConnection;
 import model.Provider;
 import model.Service;
 
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UpdateServiceViewController {
 
-    //TODO: Rewrite this class to work with Database
-    //TODO: Change Status on form to be updatable
 
     private ChocAnSysApp main;
     Stage dialog;
@@ -93,7 +92,20 @@ public class UpdateServiceViewController {
             alert.showAndWait();
             dialog.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
     }
 

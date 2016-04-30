@@ -36,8 +36,6 @@ import java.sql.SQLException;
 
 public class UpdateMemberViewController {
 
-    //TODO: Rewrite this class to work with Database
-    //TODO: Change Status on form to be updatable
 
     private ChocAnSysApp main;
     Stage dialog;

@@ -39,6 +39,7 @@ import javafx.stage.Stage;
 import model.DBConnection;
 import model.Service;
 
+import java.io.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -75,27 +76,27 @@ public class SearchUpdateServicesViewController {
 
 
 
-            //PRINT RESULT SET TO VERIFY CORRECT QUERY
-            ResultSetMetaData rsmd = rs2.getMetaData();
-            System.out.println("querying SELECT * FROM XXX");
-            int columnsNumber = rsmd.getColumnCount();
-            while (rs2.next()) {
-                for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(",  ");
-                    String columnValue = rs2.getString(i);
-                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
-                }
-                System.out.println("");
-            }
-          //END PRINT RESULT SET
-
-            //PRINT MEMBER CONTENTS TO VERIFY
-            System.out.println("Service Code: " + service.getCode());
-            System.out.println("Service Description: " + service.getName());
-            System.out.println("Service Fee: " + service.getFee());
-            System.out.println("Service Status: " + service.getStatus());
-
-            //end print member contents
+//            //PRINT RESULT SET TO VERIFY CORRECT QUERY
+//            ResultSetMetaData rsmd = rs2.getMetaData();
+//            System.out.println("querying SELECT * FROM XXX");
+//            int columnsNumber = rsmd.getColumnCount();
+//            while (rs2.next()) {
+//                for (int i = 1; i <= columnsNumber; i++) {
+//                    if (i > 1) System.out.print(",  ");
+//                    String columnValue = rs2.getString(i);
+//                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
+//                }
+//                System.out.println("");
+//            }
+//          //END PRINT RESULT SET
+//
+//            //PRINT MEMBER CONTENTS TO VERIFY
+//            System.out.println("Service Code: " + service.getCode());
+//            System.out.println("Service Description: " + service.getName());
+//            System.out.println("Service Fee: " + service.getFee());
+//            System.out.println("Service Status: " + service.getStatus());
+//
+//            //end print member contents
 
             main.updateServicesWindow(service);
             dialog.close();
@@ -104,7 +105,20 @@ public class SearchUpdateServicesViewController {
 
 
         } catch(Exception e){
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
 
 

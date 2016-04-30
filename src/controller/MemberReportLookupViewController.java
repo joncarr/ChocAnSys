@@ -18,9 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Luis on 4/27/2016.
- */
+
 public class MemberReportLookupViewController {
 
     private ChocAnSysApp main;
@@ -172,14 +170,53 @@ public class MemberReportLookupViewController {
                         try {
                             Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + PDFname));
                         }catch(Exception e){
-                            e.printStackTrace();
+                            // print errors to error log
+
+                            StringWriter sw = new StringWriter();
+                            e.printStackTrace(new PrintWriter(sw));
+                            String exceptionAsString = sw.toString();
+
+                            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                                BufferedWriter bw = new BufferedWriter(fw);
+                                PrintWriter out = new PrintWriter(bw))
+                            {
+                                out.println(exceptionAsString);
+                            }catch(IOException er){
+                                er.printStackTrace();
+                            }
                         }
                     }catch(Exception e) {
-                        e.printStackTrace();
+                        // print errors to error log
+
+                        StringWriter sw = new StringWriter();
+                        e.printStackTrace(new PrintWriter(sw));
+                        String exceptionAsString = sw.toString();
+
+                        try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            PrintWriter out = new PrintWriter(bw))
+                        {
+                            out.println(exceptionAsString);
+                        }catch(IOException er){
+                            er.printStackTrace();
+                        }
                     }
 
                 }catch(IOException e) {
-                    e.printStackTrace();
+                    // print errors to error log
+
+                    StringWriter sw = new StringWriter();
+                    e.printStackTrace(new PrintWriter(sw));
+                    String exceptionAsString = sw.toString();
+
+                    try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        PrintWriter out = new PrintWriter(bw))
+                    {
+                        out.println(exceptionAsString);
+                    }catch(IOException er){
+                        er.printStackTrace();
+                    }
                 }
 
 
@@ -192,7 +229,20 @@ public class MemberReportLookupViewController {
 
         }catch(Exception e){
 
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
 
 

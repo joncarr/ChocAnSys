@@ -64,11 +64,7 @@ public class ViewReportsViewController {
 
     @FXML
     public void membersReportBtnHandler(){
-        // PDF writer in work
-        // Date updated: 15 March 16
-        // By: Luis Lopez
-
-        main.MemberReportLookupWindow();
+       main.MemberReportLookupWindow();
     }
 
     @FXML
@@ -248,11 +244,37 @@ public class ViewReportsViewController {
                 pdf.flush();
                 pdf.close();
             }catch(Exception e) {
-                e.printStackTrace();
+                // print errors to error log
+
+                StringWriter sw = new StringWriter();
+                e.printStackTrace(new PrintWriter(sw));
+                String exceptionAsString = sw.toString();
+
+                try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    PrintWriter out = new PrintWriter(bw))
+                {
+                    out.println(exceptionAsString);
+                }catch(IOException er){
+                    er.printStackTrace();
+                }
             }
 
         }catch(IOException e){
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
         //end of new insert of validation window
 
@@ -392,13 +414,39 @@ public class ViewReportsViewController {
             try{
                 Desktop.getDesktop().open( new File(SystemSettingViewController.workingDirectory + "\\" + "EFTDataReport.pdf"));
             }catch(IOException e){
-                e.printStackTrace();
+                // print errors to error log
+
+                StringWriter sw = new StringWriter();
+                e.printStackTrace(new PrintWriter(sw));
+                String exceptionAsString = sw.toString();
+
+                try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    PrintWriter out = new PrintWriter(bw))
+                {
+                    out.println(exceptionAsString);
+                }catch(IOException er){
+                    er.printStackTrace();
+                }
             }
             pdf.flush();
             pdf.close();
 
         }catch(Exception e){
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
 
     }
@@ -417,13 +465,39 @@ public class ViewReportsViewController {
 
 
         }catch(IOException e){
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
 
         try{
             Desktop.getDesktop().open( new File(SystemSettingViewController.workingDirectory + "\\" + "AcmeUpdate.txt"));
         }catch(IOException e){
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
 
 
@@ -439,7 +513,20 @@ public class ViewReportsViewController {
             Desktop.getDesktop().open(new File("ErrorLog.txt"));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
 
 

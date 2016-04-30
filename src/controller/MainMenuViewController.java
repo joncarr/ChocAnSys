@@ -20,6 +20,9 @@
 package controller;
 
 
+import java.awt.*;
+import java.io.*;
+
 public class MainMenuViewController {
 
     private ChocAnSysApp main;
@@ -50,6 +53,66 @@ public class MainMenuViewController {
     }
 
     public void weeklyProcessBtnHandler(){
+
+        try{
+            Desktop.getDesktop().open( new File(SystemSettingViewController.workingDirectory + "\\" + "AcmeUpdate.txt"));
+        }catch(IOException e){
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
+        }
+
+        try{
+            Desktop.getDesktop().open( new File(SystemSettingViewController.workingDirectory + "\\" + "EFTDataReport.pdf"));
+        }catch(IOException e){
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
+        }
+
+        try {
+            Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "ManagerReport.pdf"));
+
+        }catch(Exception e){
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
+        }
+
+
 
     }
 

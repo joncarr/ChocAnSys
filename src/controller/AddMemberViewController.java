@@ -111,16 +111,20 @@ public class AddMemberViewController {
           dialog.close();
      }
       catch(Exception e) {
-          e.printStackTrace();
-          /*try{
-              FileWriter fw = new FileWriter("ErrorLog.txt");
-              PrintWriter pw = new PrintWriter(fw);
-              e.printStackTrace(pw);
+          // print errors to error log
 
+          StringWriter sw = new StringWriter();
+          e.printStackTrace(new PrintWriter(sw));
+          String exceptionAsString = sw.toString();
+
+          try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+              BufferedWriter bw = new BufferedWriter(fw);
+              PrintWriter out = new PrintWriter(bw))
+          {
+              out.println(exceptionAsString);
           }catch(IOException er){
               er.printStackTrace();
           }
-          */
 
       }
     }

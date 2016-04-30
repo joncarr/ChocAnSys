@@ -28,15 +28,13 @@ import javafx.stage.Stage;
 import model.DBConnection;
 import model.Provider;
 
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Optional;
 
 public class DeleteProviderViewController {
 
-    //TODO: Rewrite this class to work with Database
-    //TODO: Change Status on form to be updatable
-    //TODO: Add a button to look up the provider you want to delete and prepopulate the fields with query result
 
     private ChocAnSysApp main;
     Stage dialog;
@@ -78,7 +76,20 @@ public class DeleteProviderViewController {
             dialog.close();
 
         } catch(Exception e){
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
     }
 

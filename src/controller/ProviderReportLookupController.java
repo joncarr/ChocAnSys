@@ -209,15 +209,54 @@ public class ProviderReportLookupController {
                             Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + filename));
 
                         }catch(Exception e){
-                            e.printStackTrace();
+                            // print errors to error log
+
+                            StringWriter sw = new StringWriter();
+                            e.printStackTrace(new PrintWriter(sw));
+                            String exceptionAsString = sw.toString();
+
+                            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                                BufferedWriter bw = new BufferedWriter(fw);
+                                PrintWriter out = new PrintWriter(bw))
+                            {
+                                out.println(exceptionAsString);
+                            }catch(IOException er){
+                                er.printStackTrace();
+                            }
                         }
                         pdf.flush();
                         pdf.close();
                     }catch(Exception e) {
-                        e.printStackTrace();
+                        // print errors to error log
+
+                        StringWriter sw = new StringWriter();
+                        e.printStackTrace(new PrintWriter(sw));
+                        String exceptionAsString = sw.toString();
+
+                        try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            PrintWriter out = new PrintWriter(bw))
+                        {
+                            out.println(exceptionAsString);
+                        }catch(IOException er){
+                            er.printStackTrace();
+                        }
                     }
                 }catch(IOException e){
-                    e.printStackTrace();
+                    // print errors to error log
+
+                    StringWriter sw = new StringWriter();
+                    e.printStackTrace(new PrintWriter(sw));
+                    String exceptionAsString = sw.toString();
+
+                    try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        PrintWriter out = new PrintWriter(bw))
+                    {
+                        out.println(exceptionAsString);
+                    }catch(IOException er){
+                        er.printStackTrace();
+                    }
                 }
 
 
@@ -230,7 +269,20 @@ public class ProviderReportLookupController {
 
             dialog.close();
         }catch(Exception e ){
-            e.printStackTrace();
+            // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
         }
 
 
