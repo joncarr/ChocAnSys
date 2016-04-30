@@ -33,14 +33,11 @@ import model.Member;
 import model.Provider;
 import model.Service;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class ChocAnSysApp extends Application {
@@ -74,6 +71,16 @@ public class ChocAnSysApp extends Application {
     }
 
     public void systemSettingWindow(){
+
+        try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw))
+        {
+
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
 
         try {
             FXMLLoader loader = new FXMLLoader(ChocAnSysApp.class.getResource("../view/SystemSettingView.fxml"));
@@ -616,6 +623,7 @@ public class ChocAnSysApp extends Application {
 
         return statusBox;
     }
+
 
     public static void main(String[] args) {
 

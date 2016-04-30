@@ -61,8 +61,10 @@ public class ProviderReportLookupController {
                 provider.setZipCode(rs2.getString("zip"));
                 provider.setStatus(rs2.getString("status"));
 
+                String filename = provider.getNumber() + "-" + "ProviderReport.pdf";
+
                 try{
-                    FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf");
+                    FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + filename);
                     try {
                         PDF pdf = new PDF(fos);
                         Font f1 = new Font(pdf, CoreFont.COURIER);
@@ -116,7 +118,7 @@ public class ProviderReportLookupController {
                         text.setPosition(70,320);
                         text.drawOn(page);
 
-                        // dates needed from Database start data at 70,335//
+
                         Visit visit = new Visit();
                         Visitstmt = db.createStatement();
                         VisitRS = Visitstmt.executeQuery("select * from visits where provnumber = "
@@ -127,7 +129,7 @@ public class ProviderReportLookupController {
                         int claimscount = 0;
                         int totaldollaramount = 0;
                         while( VisitRS.next()){
-                            System.out.println("providers in visit true");
+
 
                             visit.setServiceDate(VisitRS.getString("svcdate"));
                             visit.setMemberNumber(VisitRS.getInt("mbrnumber"));
@@ -204,7 +206,7 @@ public class ProviderReportLookupController {
                         text.drawOn(page);
 
                         try {
-                            Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf"));
+                            Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + filename));
 
                         }catch(Exception e){
                             e.printStackTrace();
@@ -222,111 +224,6 @@ public class ProviderReportLookupController {
 
 
             }
-
-
-
-            /*
-            // pdf print for providers report
-            try{
-                FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf");
-                try {
-                    PDF pdf = new PDF(fos);
-                    Font f1 = new Font(pdf, CoreFont.COURIER);
-                    f1.setSize(10);
-                    Page page = new Page(pdf, A4.LANDSCAPE);
-
-                    TextLine text = new TextLine(f1, "         1         2         3         4         5         6         7         8         9    ");
-                    text.setPosition(70,72);
-                    text.drawOn(page);
-
-                    text.setText("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
-                    text.setPosition(70, 82);
-                    text.drawOn(page);
-
-                    text.setText("Chocoholics Anonymous");
-                    text.setPosition(276, 130);
-                    text.drawOn(page);
-
-                    text.setText("Provider Claims Summary");
-                    text.setPosition(270, 142);
-                    text.drawOn(page);
-
-                    text.setText(provider.getFirstName() + " " + provider.getLastName());
-                    text.setPosition(70,178);
-                    text.drawOn(page);
-
-                    text.setText("Provider Number: " + provider.getNumber());
-                    text.setPosition(450,178);
-                    text.drawOn(page);
-
-                    text.setText(provider.getStreet());
-                    text.setPosition(70,190);
-                    text.drawOn(page);
-
-                    text.setText(provider.getCity() + " " + provider.getState() + " " + provider.getZipCode());
-                    text.setPosition(70,202);
-                    text.drawOn(page);
-
-                    text.setText("Statement Date: " + SystemSettingViewController.currentDate);
-                    text.setPosition(450,202);
-                    text.drawOn(page);
-
-                    text.setText("Page: ##");
-                    text.setPosition(500,262);
-                    text.drawOn(page);
-
-                    text.setText("Service      Service                                           Claim Submitted");
-                    text.setPosition(70, 295);
-                    text.drawOn(page);
-
-                    text.setText("Date         Code     Member Nbr & Name                       Date       Time      Fee Paid");
-                    text.setPosition(70, 307);
-                    text.drawOn(page);
-
-                    text.setText("----------------------------------------------------------------------------------------------");
-                    text.setPosition(70,320);
-                    text.drawOn(page);
-
-                    // dates needed from Database
-                    text.setText("mm/dd/yyyy   XXXXXX   XXXXXXXXX   XXXXXXXXXXXXXXXXXXXXXXXXX   mm/dd/yyyy hh:mm:ss  $XXX.XX");
-                    text.setPosition(70,334);
-                    text.drawOn(page);
-                    text.setPosition(70,358);
-                    text.drawOn(page);
-                    text.setPosition(70,382);
-                    text.drawOn(page);
-
-                    text.setText("XXX");
-                    text.setPosition(70, 440);
-                    text.drawOn(page);
-
-                    text.setText("Total consultation claims submitted");
-                    text.setPosition(150, 440);
-                    text.drawOn(page);
-
-                    text.setText("$XX,XXX.XX");
-                    text.setPosition(70,455);
-                    text.drawOn(page);
-
-                    text.setText("Total Fees Paid");
-                    text.setPosition(150, 455);
-                    text.drawOn(page);
-
-                    try {
-                        Desktop.getDesktop().open(new File(SystemSettingViewController.workingDirectory + "\\" + "ProviderReport.pdf"));
-
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
-                    pdf.flush();
-                    pdf.close();
-                }catch(Exception e) {
-                    e.printStackTrace();
-                }
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-            */
 
 
 

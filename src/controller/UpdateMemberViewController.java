@@ -28,6 +28,8 @@ import javafx.stage.Stage;
 import model.DBConnection;
 import model.Member;
 
+
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -53,6 +55,7 @@ public class UpdateMemberViewController {
     private PreparedStatement stmt;
     private Connection db;
 
+
     public void setMain(ChocAnSysApp main, Stage dialog, Member member){
         this.main = main;
         this.dialog = dialog;
@@ -63,6 +66,8 @@ public class UpdateMemberViewController {
         fillMemberDetails(member);
 
     }
+
+
 
     public void confirmBtnHandler(){
 
@@ -86,6 +91,21 @@ public class UpdateMemberViewController {
             stmt.setString(6, textFieldMemberZipCode.getText());
             stmt.setString(7, comboBoxMemberStatus.getValue());
             stmt.executeUpdate();
+
+            // Added 20 APR by: Luis Lopez
+            // write to pdf changes
+
+            // write to acme update by Luis
+            try(FileWriter fw = new FileWriter("AcmeUpdate.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(member.getNumber() + ", " + member.getStatus() + ", "
+                        + member.getFirstName() + ", " + member.getLastName() );
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+
             db.close();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Update Member");
@@ -93,7 +113,25 @@ public class UpdateMemberViewController {
             alert.showAndWait();
             dialog.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+
+           // print errors to error log
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+
+            try(FileWriter fw = new FileWriter("ErrorLog.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(exceptionAsString);
+            }catch(IOException er){
+                er.printStackTrace();
+            }
+
+
+
+
         }
 
 

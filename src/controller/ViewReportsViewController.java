@@ -59,6 +59,8 @@ public class ViewReportsViewController {
     private ResultSet ServiceRS;
     private ResultSet RowRS;
 
+    public static int moveVar;
+
 
     @FXML
     public void membersReportBtnHandler(){
@@ -83,7 +85,7 @@ public class ViewReportsViewController {
         // Date Updated 13 March 16
         // By: Luis Lopez
 
-
+        moveVar = 10;
 
 
         try{
@@ -135,10 +137,11 @@ public class ViewReportsViewController {
 
                 Visit visit = new Visit();
                 stmtVisit = db.createStatement();
-                int movedown = 215;
+
 
                 Service service = new Service();
                 stmtService = db.createStatement();
+                int movedown = 215;
                 int flag = 0;
                 int hitCount = 0;
                 int totalFees = 0;
@@ -260,6 +263,8 @@ public class ViewReportsViewController {
     public void eftDataBtnHandler(){
 
 
+
+
         try{
             FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "EFTDataReport.pdf");
             PDF pdf = new PDF(fos);
@@ -279,13 +284,110 @@ public class ViewReportsViewController {
             text.setPosition(70, 121);
             text.drawOn(page);
 
-            text.setText("XXXXXXXXX              XXXXXX.XX          XXXXXXXXXXXXXXXXXXXXXXXX");
-            text.setPosition(70, 148);
-            text.drawOn(page);
-            text.setPosition(70, 160);
-            text.drawOn(page);
-            text.setPosition(70, 172);
-            text.drawOn(page);
+            //start data input from db
+            Statement Rowstmt = db.createStatement();
+            RowRS = Rowstmt.executeQuery("SELECT COUNT(*) AS rowcount FROM visits");
+            RowRS.next();
+            int count = RowRS.getInt("rowcount");
+            int holder = 0;
+            int j;
+
+
+
+
+
+            Provider provider = new Provider();
+            stmtProvider = db.createStatement();
+
+            Visit visit = new Visit();
+            stmtVisit = db.createStatement();
+
+
+            Service service = new Service();
+            stmtService = db.createStatement();
+            int movedown = 125;
+            int flag = 0;
+
+            ProviderRS = stmtProvider.executeQuery("SELECT * FROM PROVIDERS");
+            while(ProviderRS.next()){
+                //stmtProvider = db.createStatement();
+                provider.setNumber(ProviderRS.getInt("id"));
+
+                VisitRS = stmtVisit.executeQuery("select * from visits where provnumber = "
+                        + provider.getNumber() + " ;");
+                while(VisitRS.next()){
+
+                    System.out.println(provider.getNumber());
+                    visit.setServiceCode(VisitRS.getInt("svccode"));
+                    provider.setNumber(ProviderRS.getInt("id"));
+                    provider.setFirstName(ProviderRS.getString("fname"));
+                    provider.setLastName(ProviderRS.getString("lname"));
+                    ServiceRS = stmtService.executeQuery("select * from services where svccode ="
+                            + visit.getServiceCode() + " ;");
+                    service.setFee(ServiceRS.getInt("fee"));
+
+
+                    flag = 1;
+                }
+                if ( flag == 1){
+
+                    text.setText("" + provider.getNumber());
+                    text.setPosition(70, movedown+=20);
+                    text.drawOn(page);
+
+                    text.setText("$" + service.getFee());
+                    text.setPosition(230, movedown);
+                    text.drawOn(page);
+
+                    text.setText(provider.getFirstName() + " " + provider.getLastName());
+                    text.setPosition(324, movedown);
+                    text.drawOn(page);
+
+
+
+
+
+
+                    flag = 0;
+
+                }
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             try{
                 Desktop.getDesktop().open( new File(SystemSettingViewController.workingDirectory + "\\" + "EFTDataReport.pdf"));
@@ -305,45 +407,27 @@ public class ViewReportsViewController {
     public void acmeUpdateBtnHandler(){
         // Date updated 13 March 16
         // by: Luis Lopez
-        try {
-            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "AcmeReport.pdf");
 
-            PDF pdf = new PDF(fos);
-            Font f1 = new Font(pdf, CoreFont.COURIER);
-            f1.setSize(10);
-            Page page = new Page(pdf, A4.PORTRAIT);
 
-            TextLine text = new TextLine(f1, "Acme Update Report:");
-            text.setPosition(70, 82);
-            text.drawOn(page);
 
-            text.setText("Member Number        Member Status        Member Name");
-            text.setPosition(70, 106);
-            text.drawOn(page);
+        try(FileWriter fw = new FileWriter("AcmeUpdate.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw))
+        {
 
-            text.setText("------------------------------------------------------------------------------");
-            text.setPosition(70,121);
-            text.drawOn(page);
 
-            text.setText("XXXXXXXXX            XXXXXXXXXX          XXXXXXXXXXXXXXXXXXXXXXXXX");
-            text.setPosition(70,148);
-            text.drawOn(page);
-            text.setPosition(70, 160);
-            text.drawOn(page);
-            text.setPosition(70, 172);
-            text.drawOn(page);
-
-            try{
-                Desktop.getDesktop().open( new File(SystemSettingViewController.workingDirectory + "\\" + "AcmeReport.pdf"));
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-            pdf.flush();
-            pdf.close();
-
-        }catch(Exception e){
+        }catch(IOException e){
             e.printStackTrace();
         }
+
+        try{
+            Desktop.getDesktop().open( new File(SystemSettingViewController.workingDirectory + "\\" + "AcmeUpdate.txt"));
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+
+
     }
 
     @FXML
@@ -352,39 +436,13 @@ public class ViewReportsViewController {
         // By: Luis Lopez
 
         try {
-            FileOutputStream fos = new FileOutputStream(SystemSettingViewController.workingDirectory + "\\" + "ErrorReport.pdf");
-            try {
+            Desktop.getDesktop().open(new File("ErrorLog.txt"));
 
-
-                PDF pdf = new PDF(fos);
-                Font f1 = new Font(pdf, CoreFont.COURIER);
-                f1.setSize(10);
-                Page page = new Page(pdf, A4.PORTRAIT);
-
-                TextLine text = new TextLine(f1, "Chocoholics Anonymous System Error Report");
-                text.setPosition(70,82);
-                text.drawOn(page);
-
-                text.setText("Errors:");
-                text.setPosition(70,106);
-                text.drawOn(page);
-
-                try {
-                    Desktop.getDesktop().open(new File("ErrorReport.pdf"));
-
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-                pdf.flush();
-                pdf.close();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
 
     @FXML
